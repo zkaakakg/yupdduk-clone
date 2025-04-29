@@ -1,6 +1,7 @@
 package com.project.yupdduk_clone.config;
 
-import com.project.yupdduk_clone.service.CustomOAuth2UserService;
+import com.project.yupdduk_clone.config.jwt.JwtAuthenticationFilter;
+import com.project.yupdduk_clone.config.jwt.JwtTokenProvider;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -10,13 +11,15 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-    final private CustomOAuth2UserService customOAuth2UserService;
+    private final OAuth2SuccessHandler oAuth2SuccessHandler;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -45,10 +48,10 @@ public class SecurityConfig {
                         })
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID"))
-                .oauth2Login( oauth2 -> oauth2
-                        .userInfoEndpoint(userInfoEndpointConfig -> userInfoEndpointConfig
-                                .userService(customOAuth2UserService))
-                );
+                .oauth2Login(oauth2 -> oauth2
+                        .successHandler(oAuth2SuccessHandler)
+                )
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);;
         return http.build();
     }
 
