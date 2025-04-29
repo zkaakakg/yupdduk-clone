@@ -193,7 +193,7 @@ const MainPage = () => {
             style={{
               display: "flex",
               flexDirection: "column",
-              gap: "7px",
+              gap: "5px",
               padding: "30px",
               paddingBottom: "0px",
             }}
@@ -209,7 +209,7 @@ const MainPage = () => {
               gap: "15px",
               padding: "30px",
               paddingTop: "0px",
-              paddingBottom: "5px",
+              paddingBottom: "3px",
             }}
           >
             <button className="menuInnerButton">내 정보</button>
@@ -357,6 +357,8 @@ const MainPage = () => {
               display: "flex",
               paddingLeft: "20px",
               paddingRight: "20px",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
             <button>
