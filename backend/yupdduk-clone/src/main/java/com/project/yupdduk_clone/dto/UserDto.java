@@ -18,6 +18,15 @@ public class UserDto {
     private LocalDate birthDate;
     private String userRole;
 
+    public UserDto(User user) {
+        this.id = user.getId();
+        this.userName = user.getUserName();
+        this.email = user.getEmail();
+        this.phone = user.getPhone();
+        this.birthDate = user.getBirthDate();
+        this.userRole = user.getUserRole();
+    }
+
     public User toEntity(){
         return User.builder()
                 .userName(userName)
