@@ -1,16 +1,16 @@
 package com.project.yupdduk_clone.controller;
 
 import com.project.yupdduk_clone.dto.UserDto;
+import com.project.yupdduk_clone.entity.User;
 import com.project.yupdduk_clone.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,6 +30,28 @@ public class UserController {
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("error", "서버 내부 오류가 발생했습니다."));
+        }
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<UserDto> getUser(){
+       Optional<User> user = userService.getUser();
+        if (user.isPresent()) {
+            UserDto userDto = new UserDto(user.get());
+            return ResponseEntity.status(HttpStatus.OK).body(userDto);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @DeleteMapping("/user")
+    public ResponseEntity<?> deleteUser(){
+        Optional<User> user = userService.getUser();
+        if (user.isPresent()){
+            userService.deleteUser(user);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
