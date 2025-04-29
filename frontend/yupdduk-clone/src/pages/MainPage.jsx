@@ -12,6 +12,14 @@ const MainPage = () => {
   const images = [banner1, banner2, banner3];
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openMenu = () => {
+    setIsOpen(true);
+  };
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -31,7 +39,7 @@ const MainPage = () => {
     >
       <header className="header">
         <div className="menu">
-          <button className="menuButton">
+          <button className="menuButton" onClick={openMenu}>
             <img
               className="menuImg"
               src="https://www.yupdduk.com/bj-images/icon_gavbar.png"
@@ -178,6 +186,233 @@ const MainPage = () => {
           <img src={흰색화살표} alt="" style={{ width: "17px" }} />
         </div>
       </main>
+      {isOpen && <div className="overlay" onClick={closeMenu}></div>}
+      <div className={`sideMenu ${isOpen ? "open" : ""}`}>
+        <div className="menuAccount">
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "7px",
+              padding: "30px",
+              paddingBottom: "0px",
+            }}
+          >
+            <p style={{ fontSize: "17px", fontWeight: "350" }}>안녕하세요.</p>
+            <p style={{ fontSize: "23px", fontWeight: "500" }}>
+              유지원<span style={{ fontWeight: "350" }}>님</span>
+            </p>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              gap: "15px",
+              padding: "30px",
+              paddingTop: "0px",
+              paddingBottom: "5px",
+            }}
+          >
+            <button className="menuInnerButton">내 정보</button>
+            <button className="menuInnerButton">로그아웃</button>
+          </div>
+          <div
+            style={{
+              width: "100%",
+              height: "0.5px",
+              background: "rgba(255, 255, 255, 0.5)",
+            }}
+          ></div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-evenly",
+              alignItems: "center",
+              paddingBottom: "5%",
+            }}
+          >
+            <div className="menuHaving">
+              <p style={{ fontWeight: "500", fontSize: "23px" }}>
+                0<span style={{ fontSize: "18px" }}>P</span>
+              </p>
+              <p style={{ fontWeight: "300", fontSize: "15px" }}>포인트</p>
+            </div>
+            <div
+              style={{
+                background: "rgba(255, 255, 255, 0.5)",
+                height: "50px",
+                width: "0.5px",
+              }}
+            ></div>
+            <div className="menuHaving">
+              <p style={{ fontWeight: "500", fontSize: "23px" }}>
+                3<span style={{ fontSize: "18px" }}>개</span>
+              </p>
+              <p style={{ fontWeight: "300", fontSize: "15px" }}>쿠폰</p>
+            </div>
+            <div
+              style={{
+                background: "rgba(255, 255, 255, 0.5)",
+                height: "50px",
+                width: "0.5px",
+              }}
+            ></div>
+            <div className="menuHaving">
+              <p style={{ fontWeight: "500", fontSize: "23px" }}>
+                0<span style={{ fontSize: "18px" }}>매</span>
+              </p>
+              <p style={{ fontWeight: "300", fontSize: "15px" }}>선물함</p>
+            </div>
+          </div>
+        </div>
+        <div style={{ overflowY: "auto" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+              padding: "25px",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "start",
+                gap: "20px",
+              }}
+            >
+              <button className="menuInMenu">
+                <img
+                  src="https://www.yupdduk.com/bj-images/yupdduk_main/menuicon_menu.png"
+                  alt=""
+                  style={{ width: "25px" }}
+                />
+                <p style={{ fontSize: "20px" }}>메뉴 안내</p>
+              </button>
+              <button className="menuInMenu">
+                <img
+                  src="https://www.yupdduk.com/bj-images/yupdduk_main/menuicon_event.png"
+                  alt=""
+                  style={{ width: "25px" }}
+                />
+                <p style={{ fontSize: "20px" }}>이벤트 & 안내</p>
+              </button>
+            </div>
+            <div className="grayLine"></div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "start",
+                gap: "20px",
+              }}
+            >
+              <button className="menuInMenu">
+                <img
+                  src="https://www.yupdduk.com/bj-images/yupdduk_main/menuicon_yupdduk.png"
+                  alt=""
+                  style={{ width: "25px" }}
+                />
+                <p style={{ fontSize: "20px" }}>공지 사항</p>
+              </button>
+              <button className="menuInMenu">
+                <img
+                  src="https://www.yupdduk.com/bj-images/yupdduk_main/menuicon_customer.png"
+                  alt=""
+                  style={{ width: "25px" }}
+                />
+                <p style={{ fontSize: "20px" }}>자주 묻는 질문</p>
+              </button>
+              <button className="menuInMenu">
+                <img
+                  src="https://www.yupdduk.com/bj-images/yupdduk_main/menuicon_voucher.png"
+                  alt=""
+                  style={{ width: "25px" }}
+                />
+                <p style={{ fontSize: "20px" }}>고객의 소리</p>
+              </button>
+              <button className="menuInMenu">
+                <img
+                  src="https://www.yupdduk.com/bj-images/yupdduk_main/menuicon_store.png"
+                  alt=""
+                  style={{ width: "25px" }}
+                />
+                <p style={{ fontSize: "20px" }}>이용 안내</p>
+              </button>
+              <button className="menuInMenu">
+                <img
+                  src="	https://www.yupdduk.com/bj-images/yupdduk_main/menuicon_fran.png"
+                  alt=""
+                  style={{ width: "25px" }}
+                />
+                <p style={{ fontSize: "20px" }}>앱 설정</p>
+              </button>
+            </div>
+            <div className="grayLine"></div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              paddingLeft: "20px",
+              paddingRight: "20px",
+            }}
+          >
+            <button>
+              <img
+                src="https://www.yupdduk.com/bod/config/main/sns_kakaotalk_1.png"
+                alt=""
+                style={{ width: "75%" }}
+              />
+            </button>
+            <button>
+              <img
+                src="https://www.yupdduk.com/bod/config/main/sns_naverblog_1.png"
+                alt=""
+                style={{ width: "75%" }}
+              />
+            </button>
+            <button>
+              <img
+                src="https://www.yupdduk.com/bod/config/main/sns_instagram_1.png"
+                alt=""
+                style={{ width: "75%" }}
+              />
+            </button>
+            <button>
+              <img
+                src="https://www.yupdduk.com/bod/config/main/sns_facebook_1.png"
+                alt=""
+                style={{ width: "75%" }}
+              />
+            </button>
+            <button>
+              <img
+                src="https://www.yupdduk.com/bod/config/main/sns_twitter_1.png"
+                alt=""
+                style={{ width: "75%" }}
+              />
+            </button>
+            <button>
+              <img
+                src="https://www.yupdduk.com/bod/config/main/sns_youtube_1.png"
+                alt=""
+                style={{ width: "75%" }}
+              />
+            </button>
+          </div>
+          <div style={{ padding: "20px", fontSize: "10px", color: "gray" }}>
+            <p>㈜핫시즈너</p>
+            <p>대표자 : 금교일</p>
+            <p>사업자등록번호 : 201-86-13311</p>
+            <p>통신판매번호 : 2016-서울서초-0172호</p>
+            <p>본사 : 서울특별시 성동구 아차산로11가길 10, HSF빌딩 7F, 8F</p>
+            <p>고객센터 : 1661-8514</p>
+            <p>개인정보관리책임자 : 배의섭</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
