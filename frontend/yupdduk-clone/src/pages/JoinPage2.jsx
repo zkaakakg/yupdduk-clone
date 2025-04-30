@@ -40,6 +40,40 @@ const JoinPage2 = () => {
           </div>
         </div>
       </nav>
+      <main>
+        <div className="nameBirth">
+          <p>이름</p>
+          <input type="text" style={{ paddingBottom: "2px" }} />
+          <p>생년월일</p>
+          <input type="date" />
+        </div>
+        <div className="input">
+          <input type="email" placeholder="이메일" />
+        </div>
+        <div className="input">
+          <input type="password" placeholder="비밀번호" />
+        </div>
+        <div className="input">
+          <input type="password" placeholder="비밀번호 재확인" />
+        </div>
+        <div className="input">
+          <input type="tel" placeholder="핸드폰 번호" />
+        </div>
+        <div className="input">
+          <input type="text" placeholder="닉네임" />
+        </div>
+        <div className="notice">
+          <p>
+            • 회사 정책상 부적절한 단어는 등록이 제한되거나 관리자에 의해 삭제될
+            수 있습니다.
+          </p>
+          <p>
+            • 닉네임은 매장에서 고객님을 불러드리는데에 사용됩니다. 신중하게
+            설정해주세요.
+          </p>
+        </div>
+        <button className="joinButton">가입</button>
+      </main>
     </div>
   );
 };
