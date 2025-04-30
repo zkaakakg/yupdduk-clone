@@ -1,10 +1,9 @@
-package com.project.yupdduk_clone.config;
+package com.project.yupdduk_clone.security.oAuth2;
 
-import com.project.yupdduk_clone.config.jwt.JwtTokenProvider;
+import com.project.yupdduk_clone.security.jwt.JwtTokenProvider;
 import com.project.yupdduk_clone.entity.User;
 import com.project.yupdduk_clone.entity.UserRepository;
 import com.project.yupdduk_clone.enumeration.UserRole;
-import com.project.yupdduk_clone.service.OAuthAttributes;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

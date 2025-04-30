@@ -1,4 +1,4 @@
-package com.project.yupdduk_clone.config.jwt;
+package com.project.yupdduk_clone.security.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

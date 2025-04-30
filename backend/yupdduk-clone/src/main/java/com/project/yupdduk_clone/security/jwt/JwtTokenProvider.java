@@ -1,4 +1,4 @@
-package com.project.yupdduk_clone.config.jwt;
+package com.project.yupdduk_clone.security.jwt;
 
 import com.project.yupdduk_clone.enumeration.UserRole;
 import io.jsonwebtoken.Claims;

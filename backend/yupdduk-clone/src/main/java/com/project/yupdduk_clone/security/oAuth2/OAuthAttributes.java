@@ -1,4 +1,4 @@
-package com.project.yupdduk_clone.service;
+package com.project.yupdduk_clone.security.oAuth2;
 
 import lombok.Builder;
 import lombok.Getter;
