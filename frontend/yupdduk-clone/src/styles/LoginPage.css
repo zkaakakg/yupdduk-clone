@@ -10,24 +10,6 @@ button {
   background-color: transparent;
   border: none;
 }
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(222, 29, 36);
-  padding: 24px;
-}
-.backButton {
-  position: absolute;
-  left: 5%;
-}
-.backButtonImg {
-  width: 25px;
-}
-.title {
-  position: absolute;
-  color: white;
-}
 .main {
   display: flex;
   flex-direction: column;
