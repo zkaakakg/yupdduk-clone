@@ -1,39 +1,44 @@
 package com.project.yupdduk_clone.dto;
 
 import com.project.yupdduk_clone.entity.User;
+import com.project.yupdduk_clone.enumeration.UserRole;
 import lombok.*;
 
 import java.time.LocalDate;
 
-@Getter @Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class UserDto {
     private Long id;
-    private String userName;
+    private String name;
     private String email;
     private String password;
     private String phone;
     private LocalDate birthDate;
-    private String userRole;
+    private String provider;
+    private UserRole userRole;
 
     public UserDto(User user) {
         this.id = user.getId();
-        this.userName = user.getUserName();
+        this.name = user.getName();
         this.email = user.getEmail();
         this.phone = user.getPhone();
         this.birthDate = user.getBirthDate();
+        this.provider = user.getProvider();
         this.userRole = user.getUserRole();
     }
 
-    public User toEntity(){
+    public User toEntity() {
         return User.builder()
-                .userName(userName)
+                .name(name)
                 .email(email)
                 .password(password)
                 .phone(phone)
                 .birthDate(birthDate)
+                .provider("normal")
                 .userRole(userRole)
                 .build();
     }
