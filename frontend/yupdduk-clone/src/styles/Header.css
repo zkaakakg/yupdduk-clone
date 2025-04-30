@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+}
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(222, 29, 36);
+  padding: 24px;
+}
+.backButton {
+  position: absolute;
+  left: 5%;
+}
+.backButtonImg {
+  width: 30px;
+}
+.title {
+  position: absolute;
+  color: white;
+  font-size: 19px;
+}

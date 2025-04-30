@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+}
+nav {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5%;
+}
+.navInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+  padding-bottom: 10px;
+}
+.step {
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  border: 3px solid rgb(228, 228, 228);
+  background-color: white;
+}
+.step.active {
+  background-color: black;
+  border-color: black;
+}
+.line {
+  flex: 1;
+  height: 2px;
+  background-color: rgb(228, 228, 228);
+}
+.navTitle {
+  width: 352px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5%;
+  padding-top: 2%;
+}
+.checkbox1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  font-size: 17px;
+  font-weight: 500;
+  height: 52px;
+  border: 2px solid rgb(211, 211, 211);
+  border-radius: 8px;
+}
+.checkbox1 input {
+  display: none;
+}
+.checkbox1 span {
+  width: 23px;
+  height: 23px;
+  display: inline-block;
+  background-image: url(https://id.yupdduk.com/img/sp_mobile.png);
+  background-size: 216px 216px;
+  background-position: -1px -181px;
+}
+.checkbox1 input:checked + span {
+  background-image: url(https://id.yupdduk.com/img/sp_mobile.png);
+  background-position: -25px -181px;
+}
+.checkbox1:has(input:checked) {
+  border-color: rgb(85, 85, 85);
+}
+.checkList {
+  padding-top: 4%;
+}
+.checkbox2 {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  font-size: 15px;
+  font-weight: 400;
+  height: 48px;
+}
+.checkbox2 input {
+  display: none;
+}
+.checkbox2 span {
+  width: 23px;
+  height: 23px;
+  display: inline-block;
+  background-image: url(https://id.yupdduk.com/img/sp_mobile.png);
+  background-size: 216px 216px;
+  background-position: -1px -181px;
+}
+.checkbox2 input:checked + span {
+  background-image: url(https://id.yupdduk.com/img/sp_mobile.png);
+  background-position: -25px -181px;
+}
+.grayLine {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(228, 228, 228, 0.737);
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+.guide {
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  color: rgb(57, 57, 57);
+  margin-bottom: 9%;
+}
+.nextButton {
+  width: 100%;
+  height: 55px;
+  background-color: rgb(222, 29, 36);
+  border-radius: 9px;
+  font-size: 18px;
+  color: white;
+  font-weight: 500;
+  padding-bottom: 3px;
+}
