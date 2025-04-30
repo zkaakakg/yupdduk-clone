@@ -1,15 +1,10 @@
 import "../styles/LoginPage.css";
-import 뒤로가기 from "../assets/뒤로가기.png";
+import Header from "../components/Header.jsx";
 
 const LoginPage = () => {
   return (
     <div>
-      <header className="header">
-        <button className="backButton">
-          <img src={뒤로가기} alt="" className="backButtonImg" />
-        </button>
-        <p className="title">로그인</p>
-      </header>
+      <Header title="로그인" />
       <main className="main">
         <input
           className="loginInput"
