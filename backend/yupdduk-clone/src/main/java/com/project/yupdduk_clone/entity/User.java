@@ -1,5 +1,6 @@
 package com.project.yupdduk_clone.entity;
 
+import com.project.yupdduk_clone.enumeration.UserRole;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +18,7 @@ public class User {
     private Long id;
 
     @Column(name = "user_name")
-    private String userName;
+    private String name;
 
     @Column(unique = true)
     private String email;
@@ -31,17 +32,42 @@ public class User {
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @Column(name = "user_role")
-    private String userRole;
+    private String picture;
+
+    @Column
+    private String provider; // google, naver, kakao
+
+    @Column
+    private String providerId; // 제공자의 고유 ID
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "user_role", nullable = false)
+    private UserRole userRole;
+
+
 
     @Builder
-    public User(Long id, String userName, String email, String password ,String phone, LocalDate birthDate, String userRole){
+    public User(Long id, String name, String email, String password ,String phone, LocalDate birthDate,String picture, String provider, String providerId, UserRole userRole){
         this.id = id;
-        this.userName = userName;
+        this.name = name;
         this.email = email;
         this.password = password;
         this.phone = phone;
         this.birthDate = birthDate;
+        this.picture= picture;
+        this.provider = provider;
+        this.providerId=providerId;
         this.userRole = userRole;
+    }
+
+    public User update(String name, String picture) {
+        this.name = name;
+        this.picture = picture;
+
+        return this;
+    }
+
+    public String getRoleKey() {
+        return this.userRole.getValue();
     }
 }
