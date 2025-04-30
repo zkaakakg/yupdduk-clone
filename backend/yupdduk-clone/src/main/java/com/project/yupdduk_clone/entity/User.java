@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -44,7 +45,11 @@ public class User {
     @Column(name = "user_role", nullable = false)
     private UserRole userRole;
 
+    @OneToOne(mappedBy = "user")
+    private Store store;
 
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
 
     @Builder
     public User(Long id, String name, String email, String password ,String phone, LocalDate birthDate,String picture, String provider, String providerId, UserRole userRole){
