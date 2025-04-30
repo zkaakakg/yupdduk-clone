@@ -24,7 +24,7 @@ public class UserDetailService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다: " + email));
 
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(user.getUserRole()));
+        authorities.add(new SimpleGrantedAuthority(user.getUserRole().getValue()));
 
         return org.springframework.security.core.userdetails.User.builder()
                 .username(user.getEmail())
