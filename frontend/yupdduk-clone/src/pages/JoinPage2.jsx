@@ -3,6 +3,20 @@ import Header from "../components/Header.jsx";
 import "../styles/JoinPage2.css";
 
 const JoinPage2 = () => {
+  const [rawNumber, setRawNumber] = useState("");
+
+  const handleChange = (e) => {
+    const onlyNums = e.target.value.replace(/\D/g, "");
+    if (onlyNums.length > 11) return; // 최대 11자리 제한
+    setRawNumber(onlyNums);
+  };
+
+  const formatPhone = (num) => {
+    if (num.length <= 3) return num;
+    if (num.length <= 7) return `${num.slice(0, 3)}-${num.slice(3)}`;
+    return `${num.slice(0, 3)}-${num.slice(3, 7)}-${num.slice(7)}`;
+  };
+
   return (
     <div
       style={{
@@ -57,7 +71,12 @@ const JoinPage2 = () => {
           <input type="password" placeholder="비밀번호 재확인" />
         </div>
         <div className="input">
-          <input type="tel" placeholder="핸드폰 번호" />
+          <input
+            type="tel"
+            value={formatPhone(rawNumber)}
+            onChange={handleChange}
+            placeholder="핸드폰 번호"
+          />
         </div>
         <div className="input">
           <input type="text" placeholder="닉네임" />
