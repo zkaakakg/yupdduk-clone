@@ -12,8 +12,10 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -79,5 +81,22 @@ public class UserService {
     public void deleteUser(Optional<User> optionalUser) {
         User user = optionalUser.get();
         userRepository.delete(user);
+    }
+
+    public List<UserDto> getUserList(){
+        List<User> users = userRepository.findAll();
+        List<UserDto> userDtos = users.stream()
+                .map(user -> new UserDto(user.getId(), user.getName(), user.getEmail(), user.getUserRole()))
+                .collect(Collectors.toList());
+        return userDtos;
+    }
+
+    public UserDto getUserDetail(Long userId){
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isPresent()){
+            return new UserDto(user.get());
+        }else{
+            throw new IllegalStateException("사용자를 찾을 수 없습니다.");
+        }
     }
 }
