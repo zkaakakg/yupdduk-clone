@@ -40,7 +40,7 @@ public class Order {
     private List<OrderItem> orderItems;
 
     @Builder
-    Order(Long id, LocalDateTime orderTime, int totalPrice, OrderStatus orderStatus, Store store, User user, List<OrderItem> orderItems) {
+    public Order(Long id, LocalDateTime orderTime, int totalPrice, OrderStatus orderStatus, Store store, User user, List<OrderItem> orderItems) {
         this.id = id;
         this.orderTime = orderTime;
         this.totalPrice = totalPrice;
@@ -48,6 +48,24 @@ public class Order {
         this.store = store;
         this.user = user;
         this.orderItems=orderItems;
+    }
+
+    @Builder
+    public Order(Integer totalPrice, OrderStatus orderStatus, Store store, User user, List<OrderItem> orderItems){
+        this.totalPrice = totalPrice;
+        this.orderStatus = orderStatus;
+        this.store = store;
+        this.user = user;
+        this.orderItems=orderItems;
+    }
+
+    public void update(LocalDateTime orderTime, OrderStatus orderStatus){
+        this.orderTime = orderTime;
+        this.orderStatus = orderStatus;
+    }
+
+    public void updateTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
 
