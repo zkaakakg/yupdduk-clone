@@ -1,6 +1,5 @@
 package com.project.yupdduk_clone.dto;
 
-import com.project.yupdduk_clone.entity.Order;
 import com.project.yupdduk_clone.entity.OrderItem;
 import lombok.*;
 
@@ -29,19 +28,12 @@ public class OrderItemDto {
         this.menuType=orderItem.getMenuType();
         this.flavor=orderItem.getFlavor();
         this.toppings=orderItem.getToppings();
+        this.sides = orderItem.getSides();
         this.price=orderItem.getPrice();
     }
 
-    public OrderItem toEntity(Order order){
-        return OrderItem.builder()
-                .menuid(menuId)
-                .order(order)
-                .menuName(menuName)
-                .menuType(menuType)
-                .flavor(flavor)
-                .toppings(toppings)
-                .price(price)
-                .build();
-    }
 
+    public OrderItemDto(String menuName) {
+        this.menuName=menuName;
+    }
 }
