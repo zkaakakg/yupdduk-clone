@@ -32,9 +32,18 @@ public class OrderService {
             int totalPrice = 0;
             for (OrderItemDto item : orderItemDtos) {
                 Integer menuPrice = item.getPrice();
-                totalPrice += menuPrice;
+                int toppingPrice = item.getToppings().stream()
+                        .mapToInt(t -> t.getExtraPrice() * t.getAmount())
+                        .sum();
 
-                OrderItem orderItem = new OrderItem(item.getMenuId(), item.getMenuName(), item.getMenuType(), item.getFlavor(), item.getToppings(), item.getSides(), item.getPrice());
+                int sidePrice = item.getSides().stream()
+                        .mapToInt(s -> s.getExtraPrice() * s.getAmount())
+                        .sum();
+
+                int orderItemTotalPrice = menuPrice + toppingPrice + sidePrice;
+                totalPrice += orderItemTotalPrice;
+
+                OrderItem orderItem = new OrderItem(item.getMenuId(), item.getMenuName(), item.getMenuType(), item.getFlavor(), item.getToppings(), item.getSides(), item.getPrice(), orderItemTotalPrice);
                 orderItems.add(orderItem);
             }
 
@@ -76,14 +85,24 @@ public class OrderService {
         Optional<OrderItem> optionalOrderItem = orderItemRepository.findById(orderItemId);
         if (optionalOrderItem.isPresent()) {
             OrderItem orderItem = optionalOrderItem.get();
+            int toppingPrice = orderItemDto.getToppings().stream()
+                    .mapToInt(t -> t.getExtraPrice() * t.getAmount())
+                    .sum();
 
-            orderItem.update(orderItemDto.getMenuName(), orderItemDto.getMenuType(), orderItemDto.getFlavor(), orderItemDto.getToppings(), orderItemDto.getSides(), orderItemDto.getPrice());
+            int sidePrice = orderItemDto.getSides().stream()
+                    .mapToInt(s -> s.getExtraPrice() * s.getAmount())
+                    .sum();
+
+            int menuPrice = orderItemDto.getPrice();
+            int totalPrice = menuPrice + toppingPrice + sidePrice;
+
+            orderItem.update(orderItemDto.getMenuName(), orderItemDto.getMenuType(), orderItemDto.getFlavor(), orderItemDto.getToppings(), orderItemDto.getSides(), orderItemDto.getPrice(),totalPrice);
             orderItemRepository.save(orderItem);
 
             Order order = orderItem.getOrder();
 
             int updatedTotalPrice = order.getOrderItems().stream()
-                    .mapToInt(OrderItem::getPrice)
+                    .mapToInt(OrderItem::getTotalPrice)
                     .sum();
 
             order.updateTotalPrice(updatedTotalPrice);
