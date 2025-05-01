@@ -1,14 +1,18 @@
 package com.project.yupdduk_clone.dto;
 
 import com.project.yupdduk_clone.entity.Order;
-import com.project.yupdduk_clone.entity.OrderItem;
-import com.project.yupdduk_clone.entity.Store;
-import com.project.yupdduk_clone.entity.User;
 import com.project.yupdduk_clone.enumeration.OrderStatus;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class OrderDto {
     private Long id;
     private LocalDateTime orderTime;
@@ -16,28 +20,29 @@ public class OrderDto {
     private OrderStatus orderStatus;
     private Long userId;
     private Long storeId;
-    private List<OrderItem> orderItems;
+    private String storeName;
+    private List<OrderItemDto> orderItems;
 
     public OrderDto(Order order) {
         this.id = order.getId();
         this.orderTime = order.getOrderTime();
         this.totalPrice = order.getTotalPrice();
         this.orderStatus = order.getOrderStatus();
-        this.userId=order.getUser().getId();
+        this.userId = order.getUser().getId();
         this.storeId = order.getStore().getId();
-        this.orderItems=order.getOrderItems();
+        this.storeName = order.getStore().getStoreName();
+        this.orderItems = order.getOrderItems().stream()
+                .map(OrderItemDto::new)
+                .collect(Collectors.toList());
     }
 
-    public Order toEntity(User user, Store store){
-        return Order.builder()
-                .orderTime(LocalDateTime.now())
-                .totalPrice(totalPrice)
-                .orderStatus(orderStatus)
-                .store(store)
-                .user(user)
-                .orderItems(orderItems)
-                .build();
-
+    public OrderDto(Long id, LocalDateTime orderTime, String storeName, OrderStatus orderStatus, Integer totalPrice,List<OrderItemDto> orderItems) {
+        this.id = id;
+        this.orderTime = orderTime;
+        this.storeName = storeName;
+        this.orderStatus = orderStatus;
+        this.totalPrice = totalPrice;
+        this.orderItems = orderItems;
     }
 
 
