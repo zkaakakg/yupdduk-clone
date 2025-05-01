@@ -1,5 +1,7 @@
 package com.project.yupdduk_clone.entity;
 
+import com.project.yupdduk_clone.entity.valueobject.Side;
+import com.project.yupdduk_clone.entity.valueobject.Topping;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,23 +36,28 @@ public class OrderItem {
     @Column
     private String flavor;
 
+    @Column
+    private Integer price;
+
+    @Column
+    private Integer totalPrice;
+
     @ElementCollection
     @CollectionTable(name = "order_item_toppings", joinColumns = @JoinColumn(name = "order_item_id"))
     @Column(name = "topping")
-    private List<String> toppings;
+    private List<Topping> toppings;
 
 
     @ElementCollection
     @CollectionTable(name = "order_item_sides", joinColumns = @JoinColumn(name = "order_item_id"))
     @Column(name = "side")
-    private List<String> sides;
+    private List<Side> sides;
 
-    @Column
-    private Integer price;
+
 
 
     @Builder
-    public OrderItem(Long id, Order order, Long menuid, String menuName, String menuType, String flavor, List<String> toppings, List<String> sides, Integer price) {
+    public OrderItem(Long id, Order order, Long menuid, String menuName, String menuType, String flavor, List<Topping> toppings, List<Side> sides, Integer price) {
         this.id = id;
         this.order = order;
         this.menuid = menuid;
@@ -63,7 +70,7 @@ public class OrderItem {
     }
 
     @Builder
-    public OrderItem(Long menuid, String menuName, String menuType, String flavor, List<String> toppings, List<String> sides, Integer price) {
+    public OrderItem(Long menuid, String menuName, String menuType, String flavor, List<Topping> toppings, List<Side> sides, Integer price, Integer totalPrice) {
         this.menuid = menuid;
         this.menuName = menuName;
         this.menuType = menuType;
@@ -71,6 +78,7 @@ public class OrderItem {
         this.toppings = toppings;
         this.sides = sides;
         this.price = price;
+        this.totalPrice=totalPrice;
     }
 
     public void updateOrder(Order order) {
@@ -78,13 +86,14 @@ public class OrderItem {
     }
 
     public void update(String menuName, String menuType, String flavor,
-                       List<String> toppings, List<String> sides, Integer price) {
+                       List<Topping> toppings, List<Side> sides, Integer price, Integer totalPrice) {
         this.menuName = menuName;
         this.menuType = menuType;
         this.flavor = flavor;
         this.toppings = toppings;
         this.sides = sides;
         this.price = price;
+        this.totalPrice=totalPrice;
     }
 
 }
