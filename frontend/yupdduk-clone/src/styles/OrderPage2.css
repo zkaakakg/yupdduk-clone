@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+}
+.storeName {
+  font-size: 20px;
+  font-weight: 500;
+  padding: 4%;
+  background-color: white;
+  margin-bottom: 4%;
+}
+.storeInfo1 {
+  display: flex;
+  background-color: white;
+  padding: 13px;
+  font-size: 15px;
+}
+.storeInfo1 > div:first-child {
+  color: rgb(102, 102, 102);
+}
+
+main {
+  padding-bottom: 50px;
+}
+nav {
+  padding-top: 47px;
+}
+.mainMenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 227, 227);
+  padding: 5%;
+  padding-top: 3%;
+}
+.logo {
+  width: 35%;
+  padding-bottom: 3%;
+}
+.mainMenu div img {
+  width: 30%;
+}
+.Mmenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5%;
+  padding-top: 0;
+  padding-bottom: 1%;
+}
+.MmenuWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  background-color: white;
+}
+
+footer div {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(to bottom, rgb(255, 227, 227) 35%, #ffffff 35%);
+  z-index: 100;
+  border-top: 1px solid rgb(230, 230, 230);
+}
+
+Header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  background-color: white;
+}
