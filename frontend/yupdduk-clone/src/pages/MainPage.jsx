@@ -89,6 +89,10 @@ const MainPage = () => {
     }
   };
 
+  const handleMyPage = () => {
+    navigate("/mypage");
+  };
+
   return (
     <div
       style={{
@@ -140,7 +144,7 @@ const MainPage = () => {
       <main className={styles.main}>
         {user ? (
           <>
-            <button className={styles.myPage}>
+            <button className={styles.myPage} onClick={handleMyPage}>
               <div className={styles.welcome}>
                 <p style={{ fontWeight: "bold" }}>{user.name}</p>
                 <p>님, 반갑습니다.</p>
@@ -308,7 +312,12 @@ const MainPage = () => {
                   paddingBottom: "3px",
                 }}
               >
-                <button className={styles.menuInnerButton}>내 정보</button>
+                <button
+                  className={styles.menuInnerButton}
+                  onClick={handleMyPage}
+                >
+                  내 정보
+                </button>
                 <button
                   className={styles.menuInnerButton}
                   onClick={handleLogout}
