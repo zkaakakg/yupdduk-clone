@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Header from "../components/Header.jsx";
+import { useNavigate } from "react-router-dom";
 import "../styles/JoinPage2.css";
 
 const JoinPage2 = () => {
@@ -50,7 +51,7 @@ const JoinPage2 = () => {
     try {
       const response = await fetch("http://localhost:8080/user", {
         method: "POST",
-        headers: { "Content-Type": "application/json", credentials: "include" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name,
           email,
@@ -59,6 +60,7 @@ const JoinPage2 = () => {
           birthDate,
           userRole,
         }),
+        credentials: "include",
       });
 
       if (response.ok) {
