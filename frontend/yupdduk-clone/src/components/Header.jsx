@@ -7,7 +7,7 @@ const Header = (props) => {
       <button className={styles.backButton} onClick={props.ClickFunc}>
         <img src={뒤로가기} alt="" className={styles.backButtonImg} />
       </button>
-      <p className="{styles.backButton}">{props.title}</p>
+      <p className={styles.title}>{props.title}</p>
     </header>
   );
 };
