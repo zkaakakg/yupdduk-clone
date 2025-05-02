@@ -1,0 +1,257 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  position: relative;
+  padding: 8px;
+}
+.menuImg {
+  width: 20px;
+}
+.menuButton {
+  width: 30px;
+  height: 30px;
+}
+.nav {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.title {
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 130px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.home {
+  width: 28px;
+}
+.box {
+  background-color: #f8f8f8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.welcome {
+  gap: 3px;
+  font-size: 24px;
+}
+.userHaving {
+  padding: 30px;
+  padding-top: 0px;
+}
+
+.menuBox {
+  margin-top: 20px;
+  width: 100%;
+  height: px;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow: 3px 3px 10px rgba(35, 35, 35, 0.1);
+  padding: 20px;
+}
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  height: 100%;
+}
+
+.infoItem {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+}
+
+.label {
+  color: #888;
+  font-weight: 500;
+}
+
+.value {
+  font-weight: 600;
+  color: #333;
+}
+
+.menuBox {
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.menuItem {
+  all: unset;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 400;
+  color: #333;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.main {
+  position: absolute;
+  width: 100%;
+  height: 55%;
+  top: 45%;
+  background-color: white;
+  border-radius: 15px;
+}
+.myPage {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  font-size: 21px;
+  gap: 20px;
+}
+
+.userHaving {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+  padding-top: 0px;
+}
+.point {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(222, 29, 36);
+}
+.couponGift {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.coupon {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+.gift {
+  display: flex;
+  align-items: center;
+  gap: 43.3px;
+}
+.grayLine {
+  width: 100%;
+  height: 1px;
+  background-color: gray;
+  transform: scaleY(0.2);
+}
+.order {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 30px;
+  padding-top: 0;
+  padding-bottom: 25px;
+  gap: 15px;
+}
+.orderButton {
+  display: flex;
+  flex-direction: column;
+  width: 32%;
+  height: 110px;
+  padding: 10px;
+  padding-top: 0px;
+  border-radius: 15px;
+  box-shadow: 0 0 13px rgba(149, 149, 149, 0.5);
+  font-size: 17px;
+  font-weight: 500;
+}
+.giftAD {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(222, 29, 36);
+  margin: 30px;
+  margin-top: 0;
+  padding: 5px;
+  padding-right: 15px;
+  padding-left: 15px;
+  border-radius: 9px;
+}
+.giftADInner {
+  display: flex;
+  gap: 2px;
+}
+.sideMenu {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: -80%;
+  width: 80%;
+  height: 100%;
+  background: white;
+  transition: left 0.4s ease;
+  z-index: 1001;
+}
+.sideMenu.open {
+  left: 0;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+.menuAccount {
+  display: flex;
+  flex-direction: column;
+  top: 0px;
+  background-color: rgb(222, 29, 36);
+  color: white;
+  gap: 20px;
+  position: sticky;
+}
+.menuInnerButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  padding: 1.8%;
+  padding-bottom: 2.5%;
+  border: 2px solid white;
+  border-radius: 15px;
+  color: white;
+  font-weight: 350;
+}
+.menuHaving {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.menuInMenu {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
