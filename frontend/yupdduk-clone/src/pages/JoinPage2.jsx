@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Header from "../components/Header.jsx";
 import { useNavigate } from "react-router-dom";
-import "../styles/JoinPage2.css";
+import styles from "../styles/JoinPage2.module.css";
 
 const JoinPage2 = () => {
   const [form, setForm] = useState({
@@ -13,7 +13,7 @@ const JoinPage2 = () => {
     birthDate: "",
     userRole: "",
   });
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const onlyNums = e.target.value.replace(/\D/g, "");
     if (onlyNums.length > 11) return; // 최대 11자리 제한
@@ -65,6 +65,7 @@ const JoinPage2 = () => {
 
       if (response.ok) {
         alert("회원가입이 완료되었습니다.");
+        navigate("/join3");
       } else {
         console.error("서버 에러", response);
         alert("회원가입에 실패했습니다.");
@@ -84,15 +85,15 @@ const JoinPage2 = () => {
       }}
     >
       <Header title="회원가입" />
-      <nav>
-        <div className="navInner">
-          <div className="step"></div>
-          <div className="line"></div>
-          <div className="step active"></div>
-          <div className="line"></div>
-          <div className="step"></div>
+      <nav className={styles.nav}>
+        <div className={styles.navInner}>
+          <div className={styles.step}></div>
+          <div className={styles.line}></div>
+          <div className={`${styles.step} ${styles.active}`}></div>
+          <div className={styles.line}></div>
+          <div className={styles.step}></div>
         </div>
-        <div className="navTitle">
+        <div className={styles.navTitle}>
           <div
             style={{
               display: "flex",
@@ -113,8 +114,8 @@ const JoinPage2 = () => {
         </div>
       </nav>
       <form onSubmit={handleSubmit}>
-        <main>
-          <div className="nameBirth">
+        <main className={styles.main}>
+          <div className={styles.nameBirth}>
             <p>이름</p>
             <input
               name="name"
@@ -133,7 +134,7 @@ const JoinPage2 = () => {
               required
             />
           </div>
-          <div className="input">
+          <div className={styles.input}>
             <input
               name="email"
               type="email"
@@ -143,7 +144,7 @@ const JoinPage2 = () => {
               required
             />
           </div>
-          <div className="input">
+          <div className={styles.input}>
             <input
               name="password"
               type="password"
@@ -153,7 +154,7 @@ const JoinPage2 = () => {
               required
             />
           </div>
-          <div className="input">
+          <div className={styles.input}>
             <input
               name="repeatPassword"
               type="password"
@@ -163,7 +164,7 @@ const JoinPage2 = () => {
               required
             />
           </div>
-          <div className="input">
+          <div className={styles.input}>
             <input
               name="phone"
               type="tel"
@@ -176,7 +177,7 @@ const JoinPage2 = () => {
               required
             />
           </div>
-          <div className="input">
+          <div className={styles.input}>
             <select
               name="userRole"
               placeholder="권한"
@@ -189,14 +190,14 @@ const JoinPage2 = () => {
               <option value="USER">일반 사용자</option>
             </select>
           </div>
-          <div className="notice">
+          <div className={styles.notice}>
             <p>
               • 회사 정책상 부적절한 단어는 등록이 제한되거나 관리자에 의해
               삭제될 수 있습니다.
             </p>
             <p>• 잘못된 권한 선택 시 이용이 제한될 수 있습니다.</p>
           </div>
-          <button className="joinButton" type="submit">
+          <button className={styles.joinButton} type="submit">
             가입
           </button>
         </main>

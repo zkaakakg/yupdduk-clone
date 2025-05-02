@@ -1,8 +1,14 @@
 import Header from "../components/Header.jsx";
-import "../styles/JoinPage3.css";
+import { useNavigate } from "react-router-dom";
+import styles from "../styles/JoinPage3.module.css";
 
 const JoinPage3 = () => {
   const today = new Date().toISOString().slice(0, 10).replace(/-/g, ".");
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    navigate("/login");
+  };
 
   return (
     <div
@@ -13,15 +19,15 @@ const JoinPage3 = () => {
       }}
     >
       <Header title="회원가입" />
-      <nav>
-        <div className="navInner">
-          <div className="step"></div>
-          <div className="line"></div>
-          <div className="step"></div>
-          <div className="line"></div>
-          <div className="step active"></div>
+      <nav className={styles.nav}>
+        <div className={styles.navInner}>
+          <div className={styles.step}></div>
+          <div className={styles.line}></div>
+          <div className={styles.step}></div>
+          <div className={styles.line}></div>
+          <div className={`${styles.step} ${styles.active}`}></div>
         </div>
-        <div className="navTitle">
+        <div className={styles.navTitle}>
           <div
             style={{
               display: "flex",
@@ -41,8 +47,8 @@ const JoinPage3 = () => {
           </div>
         </div>
       </nav>
-      <main>
-        <div className="welcome">
+      <main className={styles.main}>
+        <div className={styles.welcome}>
           <p>
             <span>동대문엽기떡볶이 회원</span>이
           </p>
@@ -59,7 +65,9 @@ const JoinPage3 = () => {
             {today} 처리 완료
           </p>
         </div>
-        <button className="loginButton">로그인</button>
+        <button className={styles.loginButton} onClick={handleLogin}>
+          로그인
+        </button>
       </main>
     </div>
   );
