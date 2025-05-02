@@ -41,6 +41,10 @@ const LoginPage = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const handleJoin = (e) => {
+    navigate("/join1");
+  };
+
   return (
     <div>
       <Header title="로그인" />
@@ -93,7 +97,10 @@ const LoginPage = () => {
           <p style={{ fontSize: "13px", color: "rgba(149, 149, 149, 0.5)" }}>
             |
           </p>
-          <button style={{ fontSize: "14px", color: "#464646" }}>
+          <button
+            style={{ fontSize: "14px", color: "#464646" }}
+            onClick={handleJoin}
+          >
             회원 가입
           </button>
         </div>
