@@ -69,7 +69,8 @@ main {
 .nameBirth input {
   width: 33%;
   border: none;
-  font-size: 16px;
+  font-size: 14px;
+  color: rgb(115, 115, 115);
 }
 .nameBirth input:focus {
   outline: none;
@@ -106,6 +107,15 @@ main {
 }
 .input:has(input:focus) {
   border-color: rgb(85, 85, 85);
+}
+select {
+  width: 100%;
+  height: 38px;
+  border: none;
+  font-weight: 500;
+  color: rgb(115, 115, 115);
+  font-size: 16px;
+  padding: 10px;
 }
 .joinButton {
   width: 100%;
