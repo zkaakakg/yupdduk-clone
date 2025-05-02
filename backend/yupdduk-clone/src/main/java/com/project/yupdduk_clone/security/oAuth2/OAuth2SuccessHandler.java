@@ -28,9 +28,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
-    private final JwtTokenProvider jwtTokenProvider;
-    private final UserRepository userRepository;
-    private final String REDIRECT_URI = "http://localhost:3000/oauth/callback";
+    private final JwtTokenProvider jwtTokenProvider;   private final UserRepository userRepository;
+    private final String REDIRECT_URI = "http://localhost:5173/oauth/callback";
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
