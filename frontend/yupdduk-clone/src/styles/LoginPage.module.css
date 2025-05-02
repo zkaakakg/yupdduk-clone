@@ -101,7 +101,8 @@ button {
   padding-top: 10%;
   gap: 10px;
 }
-.footer button {
+.footer button,
+a {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -112,4 +113,8 @@ button {
   height: 50px;
   border: 1px solid rgba(149, 149, 149, 0.5);
   border-radius: 8px;
+}
+
+.footer a {
+  text-decoration: none;
 }
