@@ -903,6 +903,7 @@ const OrderPage2 = () => {
     setSelectedOptions({});
     setIsModalOpen(false);
   };
+  console.log(cart);
 
   return (
     <div

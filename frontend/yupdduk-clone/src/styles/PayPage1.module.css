@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+}
+nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  background-color: rgb(235, 235, 239);
+}
+.cartItem {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 90%;
+  padding: 2%;
+}
+.cartItem div {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+}
+.menuName {
+  font-weight: 500;
+}
+.menuOption p:first-child {
+  color: rgb(27, 27, 27);
+}
+.menuOption p:nth-child(2) {
+  color: rgb(126, 126, 126);
+}
+.menuPlus {
+  display: flex;
+  flex-direction: column;
+}
+.menuPlus div:first-child {
+  color: rgb(27, 27, 27);
+}
+.menuPlus div:nth-child(2) {
+  color: rgb(126, 126, 126);
+}
