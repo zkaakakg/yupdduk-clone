@@ -1,0 +1,34 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  position: relative;
+  padding: 8px;
+}
+.backButton {
+  top: 0%;
+}
+.backButtonImg {
+  width: 40px;
+}
+.nav {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.title {
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 130px;
+  font-size: 18px;
+  font-weight: 500;
+}
+.home {
+  width: 28px;
+  right: 5%;
+}
