@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Header from "../components/Header.jsx";
-import "../styles/OrderPage1.css";
+import styles from "../styles/OrderPage1.module.css";
 
 const OrderPage1 = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -64,10 +64,10 @@ const OrderPage1 = () => {
 
   return (
     <div>
-      <div className="fixed">
+      <div className={styles.fixed}>
         <Header title="방문 매장 찾기" />
         <nav>
-          <div className="search">
+          <div className={styles.search}>
             <img
               src="https://www.yupdduk.com/bj-images/yupdduk_sub/searchicon.png"
               alt=""
@@ -88,19 +88,19 @@ const OrderPage1 = () => {
         </nav>
       </div>
       <main>
-        <ul className="storeList">
+        <ul className={styles.storeList}>
           {filteredStores.length > 0 ? (
             <>
               {filteredStores.map((store) => (
-                <li className="store" key={store.id}>
-                  <p className="storeName">{store.name}</p>
-                  <p className="storeAddress">{store.address}</p>
+                <li className={styles.store} key={store.id}>
+                  <p className={styles.storeName}>{store.name}</p>
+                  <p className={styles.storeAddress}>{store.address}</p>
                 </li>
               ))}
-              <div className="grayLine"></div>
+              <div className={styles.grayLine}></div>
             </>
           ) : (
-            <div className="noStore">
+            <div className={styles.noStore}>
               <p>매장 내역이 없습니다.</p>
             </div>
           )}

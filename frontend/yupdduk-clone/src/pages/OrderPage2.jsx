@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "../components/Header.jsx";
-import "../styles/OrderPage2.css";
+import styles from "../styles/OrderPage2.module.css";
+import 카트아이콘 from "../assets/카트아이콘.png";
 
 const OrderPage2 = () => {
   const storeInfo = {
@@ -106,7 +107,7 @@ const OrderPage2 = () => {
           ],
         },
         {
-          name: "매운맛 선택",
+          name: "맛 선택",
           type: "radio",
           values: [
             { label: "매운맛", price: 0 },
@@ -191,7 +192,7 @@ const OrderPage2 = () => {
           ],
         },
         {
-          name: "매운맛 선택",
+          name: "맛 선택",
           type: "radio",
           values: [
             { label: "오리지널", price: 0 },
@@ -407,7 +408,7 @@ const OrderPage2 = () => {
         "https://www.yupdduk.com/bod/config/menu/%EC%97%BD%EA%B8%B0%EB%8B%AD%EB%B3%B6%EC%9D%8C%ED%83%95_1_4_1_1_1_1_1_1.png",
       options: [
         {
-          name: "매운맛 선택",
+          name: "맛 선택",
           type: "radio",
           values: [
             { label: "매운맛", price: 0 },
@@ -822,22 +823,105 @@ const OrderPage2 = () => {
       options: [],
     },
   ];
+  const [selectedMenu, setSelectedMenu] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState({});
+  const [cart, setCart] = useState([]);
+
+  const handleOptionChange = (optionName, value, price, isCheckbox) => {
+    setSelectedOptions((prev) => {
+      const current = prev[optionName] || []; // current가 배열로 초기화됨
+      if (isCheckbox) {
+        if (Array.isArray(current)) {
+          // current가 배열일 때만 some을 사용할 수 있음
+          if (current.some((item) => item.label === value)) {
+            return {
+              ...prev,
+              [optionName]: current.filter((item) => item.label !== value),
+            };
+          } else {
+            return {
+              ...prev,
+              [optionName]: [
+                ...current,
+                { name: value, amount: 1, extraPrice: price }, // 값과 가격을 함께 저장
+              ],
+            };
+          }
+        } else {
+          // 만약 current가 배열이 아니면 새로운 배열로 설정
+          return {
+            ...prev,
+            [optionName]: [{ name: value, amount: 1, extraPrice: price }],
+          };
+        }
+      } else {
+        return {
+          ...prev,
+          [optionName]: { name: value, amount: 1, extraPrice: price }, // 값과 가격을 함께 저장
+        };
+      }
+    });
+  };
+
+  const calculateTotalPrice = () => {
+    return cart.reduce((total, cartItem) => {
+      let itemTotal = cartItem.price;
+
+      // 토핑 가격 더하기
+      if (Array.isArray(cartItem.toppings)) {
+        itemTotal += cartItem.toppings.reduce((toppingTotal, topping) => {
+          return toppingTotal + (topping.extraPrice || 0);
+        }, 0);
+      }
+
+      // 사이드 가격 더하기
+      if (Array.isArray(cartItem.sides)) {
+        itemTotal += cartItem.sides.reduce((sideTotal, side) => {
+          return sideTotal + (side.extraPrice || 0);
+        }, 0);
+      }
+
+      return total + itemTotal;
+    }, 0);
+  };
+
+  const handleAddToCart = () => {
+    const cartItem = {
+      menuId: selectedMenu.menuId,
+      menuName: selectedMenu.menuName,
+      menuType: selectedOptions["엽기메뉴 선택"]?.name ?? null,
+      flavor: selectedOptions["맛 선택"]?.name ?? null,
+      price: selectedMenu.price,
+      toppings: selectedOptions["추가메뉴(토핑)"] ?? [],
+      sides: [
+        ...(selectedOptions["추가메뉴(사이드)"] || []),
+        ...(selectedOptions["추가메뉴(음/주류)"] || []),
+      ],
+    };
+    setCart([...cart, cartItem]);
+    setSelectedOptions({});
+    setIsModalOpen(false);
+  };
 
   return (
     <div
       style={{
         display: "flex",
         flexDirection: "column",
-        backgroundColor: "rgb(230, 230, 230)",
+        backgroundColor: "rgb(235, 235, 239)",
         height: "100vh",
       }}
     >
-      <Header title="방문 포장" />
+      <Header
+        title="방문 포장"
+        ClickFunc={() => (isModalOpen ? setIsModalOpen(false) : "")}
+      />
       <nav>
-        <div className="storeName">
+        <div className={styles.storeName}>
           <p>{storeInfo.storeName}</p>
         </div>
-        <div className="storeInfo1">
+        <div className={styles.storeInfo1}>
           <div style={{ width: "120px", fontWeight: "400" }}>
             <p>· 주문방법</p>
             <p>· 최소주문</p>
@@ -851,17 +935,17 @@ const OrderPage2 = () => {
         </div>
       </nav>
       <main>
-        <div className="mainMenu">
+        <div className={styles.mainMenu}>
           <img
             src="https://www.yupdduk.com/bj-images/logo_m.png"
             alt=""
-            className="logo"
+            className={styles.logo}
           />
-          <div className="MmenuWrapper">
+          <div className={styles.MmenuWrapper}>
             <h2
               style={{
                 background:
-                  "linear-gradient(to bottom, #FFFFFF 50%, rgb(255, 227, 227) 50%)",
+                  "linear-gradient(to bottom, #FFFFFF 50%, rgb(255, 240, 240) 50%)",
               }}
             >
               메인메뉴
@@ -869,7 +953,12 @@ const OrderPage2 = () => {
             {menuList.slice(0, 6).map((menu, index) => (
               <div
                 key={menu.menuId}
-                className="Mmenu"
+                className={styles.Mmenu}
+                role="button"
+                onClick={() => {
+                  setSelectedMenu(menu);
+                  setIsModalOpen(true);
+                }}
                 style={{
                   borderBottom:
                     index !== menuList.length - 1
@@ -888,8 +977,262 @@ const OrderPage2 = () => {
             ))}
           </div>
         </div>
+        <div className={styles.menuList}>
+          <div className={styles.menuTitle}>엽기닭발메뉴</div>
+          {menuList.slice(6, 9).map((menu, index) => (
+            <div
+              key={menu.menuId}
+              className={styles.menu}
+              role="button"
+              onClick={() => {
+                setSelectedMenu(menu);
+                setIsModalOpen(true);
+              }}
+              style={{
+                borderBottom:
+                  index !== menuList.length - 1
+                    ? "1px solid rgb(230, 230, 230)"
+                    : "none",
+              }}
+            >
+              <div>
+                <h3>{menu.menuName}</h3>
+                <p style={{ fontSize: "16px", fontWeight: "500" }}>
+                  {menu.price.toLocaleString()}원
+                </p>
+              </div>
+              <img src={menu.image} alt={menu.menuName} />
+            </div>
+          ))}
+        </div>
+        <div className={styles.menuList}>
+          <div className={styles.menuTitle}>밀키트</div>
+          {menuList.slice(9, 10).map((menu, index) => (
+            <div
+              key={menu.menuId}
+              className={styles.menu}
+              role="button"
+              onClick={() => {
+                setSelectedMenu(menu);
+                setIsModalOpen(true);
+              }}
+              style={{
+                borderBottom:
+                  index !== menuList.length - 1
+                    ? "1px solid rgb(230, 230, 230)"
+                    : "none",
+              }}
+            >
+              <div>
+                <h3>{menu.menuName}</h3>
+                <p style={{ fontSize: "16px", fontWeight: "500" }}>
+                  {menu.price.toLocaleString()}원
+                </p>
+              </div>
+              <img src={menu.image} alt={menu.menuName} />
+            </div>
+          ))}
+        </div>
+        <div className={styles.menuList}>
+          <div className={styles.menuTitle}>사이드</div>
+          {menuList.slice(10, 29).map((menu, index) => (
+            <div
+              key={menu.menuId}
+              className={styles.menu}
+              role="button"
+              onClick={() => {
+                setSelectedMenu(menu);
+                setIsModalOpen(true);
+              }}
+              style={{
+                borderBottom:
+                  index !== menuList.length - 1
+                    ? "1px solid rgb(230, 230, 230)"
+                    : "none",
+              }}
+            >
+              <div>
+                <h3>{menu.menuName}</h3>
+                <p style={{ fontSize: "16px", fontWeight: "500" }}>
+                  {menu.price.toLocaleString()}원
+                </p>
+              </div>
+              <img src={menu.image} alt={menu.menuName} />
+            </div>
+          ))}
+        </div>
+        <div className={styles.menuList}>
+          <div className={styles.menuTitle}>음/주류</div>
+          {menuList.slice(29, 30).map((menu, index) => (
+            <div
+              key={menu.menuId}
+              className={styles.menu}
+              role="button"
+              onClick={() => {
+                setSelectedMenu(menu);
+                setIsModalOpen(true);
+              }}
+              style={{
+                borderBottom:
+                  index !== menuList.length - 1
+                    ? "1px solid rgb(230, 230, 230)"
+                    : "none",
+              }}
+            >
+              <div>
+                <h3>{menu.menuName}</h3>
+                <p style={{ fontSize: "16px", fontWeight: "500" }}>
+                  {menu.price.toLocaleString()}원
+                </p>
+              </div>
+              <img src={menu.image} alt={menu.menuName} />
+            </div>
+          ))}
+        </div>
       </main>
+      {isModalOpen && selectedMenu && (
+        <div className={styles.modal}>
+          <div style={{ overflowY: "auto", height: "100vh", width: "100%" }}>
+            <div className={styles.modalNav}>
+              <div
+                className={styles.modalImg}
+                style={{ backgroundImage: `url(${selectedMenu.image})` }}
+              ></div>
+              <div className={styles.modalTitle}>
+                <p>{selectedMenu.menuName}</p>
+              </div>
+              <div className={styles.modalPrice}>
+                <p>가격</p>
+                <p>{selectedMenu.price.toLocaleString()}원</p>
+              </div>
+            </div>
+            <div className={styles.modalMain}>
+              {selectedMenu.options.map((option, idx) => (
+                <div
+                  style={{
+                    borderBottom:
+                      idx !== selectedMenu.options.length - 1
+                        ? "1px solid rgb(230, 230, 230)"
+                        : "none",
+                  }}
+                  className={styles.option}
+                  key={idx}
+                >
+                  <p className={styles.optionName}>{option.name}</p>
+                  {option.type === "radio"
+                    ? option.values.map((val, i) => (
+                        <label className={styles.optionOption} key={i}>
+                          <div>
+                            <label className={styles.checkbox}>
+                              <input
+                                type="radio"
+                                name={option.name}
+                                value={val.label}
+                                onChange={() =>
+                                  handleOptionChange(
+                                    option.name,
+                                    val.label,
+                                    val.price,
+                                    false
+                                  )
+                                }
+                              />
+                              <span></span>
+                              {val.label}
+                            </label>
+                          </div>
+                          <p>{val.price.toLocaleString()}원</p>
+                        </label>
+                      ))
+                    : option.values.map((val, i) => (
+                        <label className={styles.optionOption} key={i}>
+                          <div>
+                            <label className={styles.radio}>
+                              <input
+                                type="checkbox"
+                                name={option.name}
+                                value={val.label}
+                                onChange={() =>
+                                  handleOptionChange(
+                                    option.name,
+                                    val.label,
+                                    val.price,
+                                    true
+                                  )
+                                }
+                              />
+                              <span></span>
+                              {val.label}
+                            </label>
+                          </div>
+                          <p>{val.price.toLocaleString()}원</p>
+                        </label>
+                      ))}
+                </div>
+              ))}
+            </div>
+            <div style={{ width: "100%", height: "200px" }}></div>
+          </div>
+        </div>
+      )}
+
       <footer>
+        {isModalOpen ? (
+          <div>
+            <button className={styles.button} onClick={() => handleAddToCart()}>
+              <img src={카트아이콘} alt="" />
+              <p>장바구니에 담기</p>
+            </button>
+          </div>
+        ) : (
+          <div>
+            {cart && cart.length > 0 ? (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                  width: "100%",
+                  padding: "0",
+                }}
+              >
+                <p style={{ color: "rgb(222, 29, 36)", fontSize: "14px" }}>
+                  (픽업 최소주문금액 9,000원)
+                </p>
+                <button className={styles.button}>
+                  <p
+                    style={{
+                      color: "yellow",
+                      fontWeight: "400",
+                    }}
+                  >
+                    {calculateTotalPrice().toLocaleString()}원{" "}
+                  </p>
+                  <p
+                    style={{
+                      color: "white",
+                      fontWeight: "500",
+                    }}
+                  >
+                    주문하기
+                  </p>
+                  <p
+                    style={{
+                      fontSize: "14px",
+                      color: "white",
+                      paddingLeft: "3px",
+                      fontWeight: "400",
+                    }}
+                  >
+                    ({cart.length}개)
+                  </p>
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        )}
         <div></div>
       </footer>
     </div>
