@@ -30,7 +30,7 @@ const PayPage1 = () => {
   return (
     <div>
       <Header title="방문포장" />
-      <nav>
+      <nav className={styles.nav}>
         {cartItems.map((item, index) => (
           <div
             key={item.orderId}
@@ -104,7 +104,7 @@ const PayPage1 = () => {
           </div>
         ))}
       </nav>
-      <main>
+      <main className={styles.main}>
         <div className={styles.info}>
           <div>
             <p>매장정보</p>
@@ -140,7 +140,7 @@ const PayPage1 = () => {
           </div>
         </div>
       </main>
-      <footer>
+      <footer className={styles.footer}>
         <div>
           <button className={styles.button}>
             <p style={{ fontWeight: "400", color: "rgb(255, 212, 23)" }}>

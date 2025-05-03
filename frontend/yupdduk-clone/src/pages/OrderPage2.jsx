@@ -918,7 +918,7 @@ const OrderPage2 = () => {
         title="방문 포장"
         ClickFunc={() => (isModalOpen ? setIsModalOpen(false) : "")}
       />
-      <nav>
+      <nav className={styles.nav}>
         <div className={styles.storeName}>
           <p>{storeInfo.storeName}</p>
         </div>
@@ -935,7 +935,7 @@ const OrderPage2 = () => {
           </div>
         </div>
       </nav>
-      <main>
+      <main className={styles.main}>
         <div className={styles.mainMenu}>
           <img
             src="https://www.yupdduk.com/bj-images/logo_m.png"
@@ -1177,7 +1177,7 @@ const OrderPage2 = () => {
         </div>
       )}
 
-      <footer>
+      <footer className={styles.footer}>
         {isModalOpen ? (
           <div>
             <button className={styles.button} onClick={() => handleAddToCart()}>

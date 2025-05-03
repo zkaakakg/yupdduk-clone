@@ -87,7 +87,7 @@ const OrderPage1 = () => {
           </div>
         </nav>
       </div>
-      <main>
+      <main className={styles.main}>
         <ul className={styles.storeList}>
           {filteredStores.length > 0 ? (
             <>

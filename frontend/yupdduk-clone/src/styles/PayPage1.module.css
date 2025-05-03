@@ -1,16 +1,4 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  border: none;
-}
-nav {
+.nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,7 +8,7 @@ nav {
   padding-bottom: 3%;
   background-color: rgb(235, 235, 239);
 }
-main {
+.main {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -116,7 +104,7 @@ main {
   background-color: rgb(238, 244, 247);
   border-radius: 10px;
 }
-footer {
+.footer {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -127,16 +115,16 @@ footer {
   border-top: 1px solid rgb(230, 230, 230);
 }
 
-footer div:first-child {
+.footer div:first-child {
   background-color: rgb(255, 240, 240);
   min-height: 20px;
   padding: 3%;
 }
 
-footer div:nth-child(2) {
+.footer div:nth-child(2) {
   height: 30px;
 }
-footer div {
+.footer div {
   display: flex;
   justify-content: center;
   align-items: center;

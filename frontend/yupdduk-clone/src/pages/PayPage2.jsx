@@ -18,7 +18,7 @@ const PayPage2 = () => {
   return (
     <div>
       <Header title="주문 완료" />
-      <main>
+      <main className={styles.main}>
         <div className={styles.welcome}>
           <p>
             <span>주문</span>이 완료되었습니다.
