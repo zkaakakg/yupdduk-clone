@@ -16,7 +16,6 @@ const MyOrderDetailPage = () => {
         withCredentials: true,
       })
       .then((res) => {
-        console.log("응답 데이터:", res.data);
         setOrder(res.data);
       })
       .catch((err) => {
