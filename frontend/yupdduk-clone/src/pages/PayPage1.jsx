@@ -115,13 +115,45 @@ const PayPage1 = () => {
             <div>01055411767</div>
           </div>
         </div>
-        <div>
+        <div className={styles.gap}></div>
+        <div className={styles.pay}>
           <p>결제수단</p>
           <div>
             <img src="/체크박스O.png" alt="" />
+            <p>1초 결제</p>
+          </div>
+        </div>
+        <div className={styles.card}>
+          <div className={styles.cardIC}></div>
+        </div>
+        <div className={styles.gap}></div>
+        <div className={styles.totalPrice}>
+          <p>결제금액</p>
+          <div style={{ fontSize: "14px", fontWeight: "400" }}>
+            <p>총 주문금액</p>
+            <p>10,000원</p>
+          </div>
+          <div className={styles.blackLine}></div>
+          <div style={{ paddingTop: "10px" }}>
+            <p>총 주문금액</p>
+            <p>10,000원</p>
           </div>
         </div>
       </main>
+      <footer>
+        <div>
+          <button className={styles.button}>
+            <p style={{ fontWeight: "400", color: "rgb(255, 212, 23)" }}>
+              10,000원
+            </p>
+            <p>결제하기</p>
+            <p style={{ fontSize: "13px", fontWeight: "400" }}>
+              ({cartItems.length}개)
+            </p>
+          </button>
+        </div>
+        <div></div>
+      </footer>
     </div>
   );
 };

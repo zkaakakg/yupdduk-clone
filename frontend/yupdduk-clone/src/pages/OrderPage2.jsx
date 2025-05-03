@@ -1203,7 +1203,7 @@ const OrderPage2 = () => {
                 <button className={styles.button}>
                   <p
                     style={{
-                      color: "yellow",
+                      color: "rgb(255, 212, 23)",
                       fontWeight: "400",
                     }}
                   >
