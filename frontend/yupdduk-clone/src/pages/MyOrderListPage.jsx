@@ -20,16 +20,6 @@ const MyOrderListPage = () => {
       .catch((err) => console.error(err));
   }, []);
 
-  const openMenu = () => {
-    setIsOpen(true);
-  };
-  const closeMenu = () => {
-    setIsOpen(false);
-  };
-  const handleHome = () => {
-    navigate("/");
-  };
-
   const handleOrderDetail = (orderId) => {
     navigate(`/my-order/${orderId}`);
   };
