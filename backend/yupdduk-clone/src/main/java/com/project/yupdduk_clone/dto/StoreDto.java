@@ -5,6 +5,7 @@ import com.project.yupdduk_clone.entity.User;
 import lombok.*;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
@@ -17,8 +18,8 @@ public class StoreDto {
     private String managerName;
     private String address;
     private String storePhone;
-    private LocalTime openTime;
-    private LocalTime closeTime;
+    private String openTime;
+    private String closeTime;
     private Long userId;
 
   public StoreDto(Store store){
@@ -27,20 +28,25 @@ public class StoreDto {
       this.managerName = store.getManagerName();
       this.address = store.getAddress();
       this.storePhone = store.getStorePhone();
-      this.openTime = store.getOpenTime();
-      this.closeTime = store.getCloseTime();
-      this.userId = store.getUser().getId();
+      this.openTime = store.getOpenTime().toString();
+      this.closeTime = store.getCloseTime().toString();
+      if (store.getUser() != null) {
+          this.userId = store.getUser().getId();
+      } else {
+          this.userId = null;
+      }
   }
 
-  public Store toEntity(User user){
-      return Store.builder()
-              .storeName(storeName)
-              .managerName(managerName)
-              .address(address)
-              .storePhone(storePhone)
-              .openTime(openTime)
-              .closeTime(closeTime)
-              .user(user)
-              .build();
-  }
+    public Store toEntity(User user){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        return Store.builder()
+                .storeName(storeName)
+                .managerName(managerName)
+                .address(address)
+                .storePhone(storePhone)
+                .openTime(LocalTime.parse(openTime, formatter))
+                .closeTime(LocalTime.parse(closeTime, formatter))
+                .user(user)
+                .build();
+        }
 }
