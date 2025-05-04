@@ -121,7 +121,7 @@ public class OrderService {
 
             Order order = orderItem.get().getOrder();
             int updatedTotalPrice = order.getOrderItems().stream()
-                    .mapToInt(OrderItem::getPrice)
+                    .mapToInt(OrderItem::getTotalPrice)
                     .sum();
             order.updateTotalPrice(updatedTotalPrice);
             orderRepository.save(order);
