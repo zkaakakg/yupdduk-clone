@@ -37,6 +37,9 @@ const MainPage = () => {
         if (contentType && contentType.includes("application/json")) {
           const data = await response.json();
           setUser(data);
+          if (data.userRole === "ADMIN") {
+            navigate("/admin");
+          }
         } else {
           setUser(null);
         }
@@ -48,7 +51,7 @@ const MainPage = () => {
   }, []);
 
   const handleLogin = () => {
-    navigate("/login"); // 로그인 페이지로 이동
+    navigate("/login");
   };
 
   const openMenu = () => {
