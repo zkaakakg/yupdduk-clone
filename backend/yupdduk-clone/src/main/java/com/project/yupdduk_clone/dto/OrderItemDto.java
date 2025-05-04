@@ -22,6 +22,7 @@ public class OrderItemDto {
     private List<Topping> toppings;
     private List<Side> sides;
     private Integer totalPrice;
+    private Long id;
 
 
     public OrderItemDto(OrderItem orderItem) {
@@ -34,6 +35,7 @@ public class OrderItemDto {
         this.sides = orderItem.getSides();
         this.price = orderItem.getPrice();
         this.totalPrice = orderItem.getTotalPrice();
+        this.id = orderItem.getId();
     }
 
 

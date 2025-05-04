@@ -968,6 +968,10 @@ const OrderPage2 = () => {
   };
   console.log(cart);
 
+  if (loading) {
+    return <div></div>;
+  }
+
   return (
     <div
       style={{

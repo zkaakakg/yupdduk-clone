@@ -7,8 +7,10 @@ const OrderPage1 = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [stores, setStores] = useState([]);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     const token = localStorage.getItem("acccessToken"); // 철자: acccess → access 수정!
 
     fetch("http://localhost:8080/stores", {
@@ -29,6 +31,7 @@ const OrderPage1 = () => {
           const data = await response.json();
           console.log("받은 데이터:", data);
           setStores(data); // 받아온 데이터 저장
+          setLoading(false);
         } else {
           console.warn("JSON 응답 아님");
         }
@@ -45,6 +48,10 @@ const OrderPage1 = () => {
   const handleOrder2 = (storeId) => {
     navigate(`/order2/${storeId}`);
   };
+
+  if (loading) {
+    return <div></div>;
+  }
 
   return (
     <div>

@@ -1,6 +1,9 @@
 import styles from "../styles/PayPage2.module.css";
 import Header from "../components/Header.jsx";
+import { useNavigate } from "react-router-dom";
 const PayPage2 = () => {
+  const navigate = useNavigate();
+
   const CurrentTime = () => {
     const now = new Date();
 
@@ -10,14 +13,16 @@ const PayPage2 = () => {
     const hours = now.getHours();
     const minutes = now.getMinutes();
 
-    return (
-      <div>{`${year}년 ${month}월 ${date}일 ${hours}시 ${minutes}분`}</div>
-    );
+    return `${year}년 ${month}월 ${date}일 ${hours}시 ${minutes}분`;
+  };
+
+  const handleMain = () => {
+    navigate("/");
   };
 
   return (
     <div>
-      <Header title="주문 완료" />
+      <Header title="주문 완료" ClickFunc={handleMain} />
       <main className={styles.main}>
         <div className={styles.welcome}>
           <p>
@@ -35,7 +40,9 @@ const PayPage2 = () => {
             {CurrentTime()}
           </p>
         </div>
-        <button className={styles.loginButton}>확인</button>
+        <button onClick={() => handleMain()} className={styles.loginButton}>
+          확인
+        </button>
       </main>
     </div>
   );
