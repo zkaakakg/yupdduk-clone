@@ -5,6 +5,9 @@ import com.project.yupdduk_clone.dto.OrderItemDto;
 import com.project.yupdduk_clone.dto.OrderRequestDto;
 import com.project.yupdduk_clone.entity.*;
 import com.project.yupdduk_clone.enumeration.OrderStatus;
+import com.project.yupdduk_clone.repository.OrderItemRepository;
+import com.project.yupdduk_clone.repository.OrderRepository;
+import com.project.yupdduk_clone.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

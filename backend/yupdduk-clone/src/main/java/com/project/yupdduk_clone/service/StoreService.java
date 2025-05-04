@@ -2,7 +2,7 @@ package com.project.yupdduk_clone.service;
 
 import com.project.yupdduk_clone.dto.StoreDto;
 import com.project.yupdduk_clone.entity.Store;
-import com.project.yupdduk_clone.entity.StoreRepository;
+import com.project.yupdduk_clone.repository.StoreRepository;
 import com.project.yupdduk_clone.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

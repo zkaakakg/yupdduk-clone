@@ -1,7 +1,7 @@
-package com.project.yupdduk_clone.service;
+package com.project.yupdduk_clone.service.auth;
 
 import com.project.yupdduk_clone.entity.User;
-import com.project.yupdduk_clone.entity.UserRepository;
+import com.project.yupdduk_clone.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
