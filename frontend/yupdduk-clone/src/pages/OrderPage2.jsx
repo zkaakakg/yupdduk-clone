@@ -826,32 +826,38 @@ const OrderPage2 = () => {
 
   const handleOptionChange = (optionName, value, price, isCheckbox) => {
     setSelectedOptions((prev) => {
-      const current = prev[optionName] || []; // current가 배열로 초기화됨
+      // 이미 선택된 값이 있으면 가져오고, 없으면 빈 배열로 초기화
+      const current = prev[optionName] || [];
       if (isCheckbox) {
-        // 체크박스일 경우: 여러 개 선택 가능 → 배열 유지
+        //체크박스인지?
         if (Array.isArray(current)) {
-          if (current.some((item) => item.name === value)) {
+          //current가 배열인지?
+          // 이미 선택된 값 중에서 같은 값이 있는지 확인
+          if (current.some((item) => item.label === value)) {
+            // 있으면 제거
             return {
               ...prev,
               [optionName]: current.filter((item) => item.name !== value),
             };
           } else {
+            // 없으면 추가
             return {
               ...prev,
               [optionName]: [
                 ...current,
-                { name: value, amount: 1, extraPrice: price },
+                { name: value, amount: 1, extraPrice: price }, // 값과 가격을 함께 저장
               ],
             };
           }
         } else {
+          // current가 배열이 아니면 새로운 배열로 설정
           return {
             ...prev,
             [optionName]: [{ name: value, amount: 1, extraPrice: price }],
           };
         }
       } else {
-        // 라디오 버튼이나 단일 선택도 배열로 저장되도록 변경
+        //체크박스가 아니면? (radio)
         return {
           ...prev,
           [optionName]: [{ name: value, amount: 1, extraPrice: price }],
