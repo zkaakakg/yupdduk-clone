@@ -1,5 +1,6 @@
-package com.project.yupdduk_clone.entity;
+package com.project.yupdduk_clone.repository;
 
+import com.project.yupdduk_clone.entity.OrderItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
