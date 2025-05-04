@@ -23,6 +23,7 @@ const OrderPage1 = () => {
       .then(async (response) => {
         if (!response.ok) {
           console.error("응답 실패", response.status);
+          setLoading(false);
           return;
         }
 
@@ -34,10 +35,12 @@ const OrderPage1 = () => {
           setLoading(false);
         } else {
           console.warn("JSON 응답 아님");
+          setLoading(false);
         }
       })
       .catch((err) => {
         console.error("요청 실패:", err);
+        setLoading(false);
       });
   }, []);
 
