@@ -10,6 +10,7 @@ import JoinPage3 from "./pages/JoinPage3";
 import MyPage from "./pages/MyPage";
 import MyOrderListPage from "./pages/MyOrderListPage";
 import MyOrderDetailPage from "./pages/MyOrderDetailPage";
+import AdminPage from "./pages/AdminPage";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -23,6 +24,7 @@ createRoot(document.getElementById("root")).render(
       <Route path="/my-order" element={<MyOrderListPage />} />
       <Route path="/my-order/:orderId" element={<MyOrderDetailPage />} />
       <Route path="/oauth/callback" element={<OAuthCallbackPage />} />
+      <Route path="/admin" element={<AdminPage />} />
     </Routes>
   </BrowserRouter>
 );
