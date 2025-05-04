@@ -29,7 +29,7 @@ public class AdminController {
         return "관리자 페이지입니다.";
     }
 
-    @PostMapping("/store")
+    @PostMapping("/stores")
     public ResponseEntity<?> addStore(@RequestBody StoreDto storeDto) {
         try {
             storeService.addStore(storeDto);

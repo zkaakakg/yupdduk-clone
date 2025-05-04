@@ -14,10 +14,11 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/users")
 public class UserController {
     private final UserService userService;
 
-    @PostMapping("/user")
+    @PostMapping
     public ResponseEntity<?> signUp(@RequestBody UserDto userDto){
         try{
             userService.signUp(userDto);
@@ -33,7 +34,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/user")
+    @GetMapping
     public ResponseEntity<UserDto> getUser(){
        Optional<User> user = userService.getUser();
         if (user.isPresent()) {
@@ -44,7 +45,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/user")
+    @DeleteMapping
     public ResponseEntity<?> deleteUser(){
         Optional<User> user = userService.getUser();
         if (user.isPresent()){
