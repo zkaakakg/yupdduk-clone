@@ -43,7 +43,7 @@ const OrderPage1 = () => {
   );
 
   const handleOrder2 = (storeId) => {
-    navigate("/order2/${storeId}");
+    navigate(`/order2/${storeId}`);
   };
 
   return (
