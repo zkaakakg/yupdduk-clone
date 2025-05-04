@@ -27,20 +27,26 @@ const StoreTab = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:8080/stores", {
+  const getStores = async () => {
+    try {
+      const res = await axios.get("http://localhost:8080/stores", {
         withCredentials: true,
-      })
-      .then((res) => setStores(res.data))
-      .catch((err) => console.error(err));
+      });
+      setStores(res.data);
+    } catch (err) {
+      console.error("매장 목록 불러오기 실패", err);
+    }
+  };
+
+  useEffect(() => {
+    getStores();
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8080/admin/store", {
+      const response = await fetch("http://localhost:8080/admin/stores", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -49,6 +55,15 @@ const StoreTab = () => {
 
       if (response.ok) {
         alert("매장 등록이 완료되었습니다.");
+        await getStores();
+        setForm({
+          storeName: "",
+          managerName: "",
+          address: "",
+          storePhone: "",
+          openTime: "",
+          closeTime: "",
+        });
       } else {
         console.error("서버 에러", response);
         alert("매장등록에 실패했습니다.");
