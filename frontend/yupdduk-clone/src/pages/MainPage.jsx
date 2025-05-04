@@ -16,8 +16,10 @@ const MainPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     const token = localStorage.getItem("acccessToken");
 
     fetch("http://localhost:8080/user", {
@@ -30,6 +32,7 @@ const MainPage = () => {
       .then(async (response) => {
         if (!response.ok) {
           setUser(null);
+          setLoading(false);
           return;
         }
 
@@ -37,13 +40,16 @@ const MainPage = () => {
         if (contentType && contentType.includes("application/json")) {
           const data = await response.json();
           setUser(data);
+          setLoading(false);
         } else {
           setUser(null);
+          setLoading(false);
         }
       })
       .catch((err) => {
         console.error("사용자 정보 불러오기 실패:", err);
         setUser(null);
+        setLoading(false);
       });
   }, []);
 
@@ -85,7 +91,7 @@ const MainPage = () => {
         setUser(null);
       } else {
         console.error("서버 에러", response);
-        alert("로그이웃에 실패했습니다.");
+        alert("로그아아웃에 실패했습니다.");
       }
     } catch (err) {
       console.error("네트워크 에러", err);
@@ -96,6 +102,10 @@ const MainPage = () => {
   const handleMyPage = () => {
     navigate("/mypage");
   };
+
+  if (loading) {
+    return <div></div>;
+  }
 
   return (
     <div

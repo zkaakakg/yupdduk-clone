@@ -200,7 +200,9 @@ const PayPage1 = () => {
               className={styles.button}
               disabled={totalPrice === 0}
               onClick={() => handlePay()}
-              style={{ background: totalPrice === 0 ? "gray" : "" }}
+              style={{
+                background: totalPrice === 0 ? "rgb(180, 180, 180)" : "",
+              }}
             >
               <p
                 style={{

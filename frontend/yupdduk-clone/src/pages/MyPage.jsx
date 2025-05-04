@@ -5,9 +5,11 @@ import Header from "../components/Header2";
 
 const MyPage = () => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
+    setLoading(true);
     const token = localStorage.getItem("acccessToken");
 
     fetch("http://localhost:8080/user", {
@@ -20,6 +22,7 @@ const MyPage = () => {
       .then(async (response) => {
         if (!response.ok) {
           setUser(null);
+          setLoading(false);
           return;
         }
 
@@ -27,13 +30,16 @@ const MyPage = () => {
         if (contentType && contentType.includes("application/json")) {
           const data = await response.json();
           setUser(data);
+          setLoading(false);
         } else {
           setUser(null);
+          setLoading(false);
         }
       })
       .catch((err) => {
         console.error("사용자 정보 불러오기 실패:", err);
         setUser(null);
+        setLoading(false);
       });
   }, []);
 
@@ -64,6 +70,10 @@ const MyPage = () => {
   const handleHome = () => {
     navigate("/");
   };
+
+  if (loading) {
+    return <div></div>;
+  }
 
   return (
     <div

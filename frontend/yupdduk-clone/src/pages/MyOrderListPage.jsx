@@ -7,8 +7,10 @@ import axios from "axios";
 const MyOrderListPage = () => {
   const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     const token = localStorage.getItem("acccessToken");
 
     axios
@@ -16,13 +18,20 @@ const MyOrderListPage = () => {
         headers: { Authorization: `Bearer ${token}` },
         withCredentials: true,
       })
-      .then((res) => setOrders(res.data))
+      .then((res) => {
+        setOrders(res.data);
+        setLoading(false);
+      })
       .catch((err) => console.error(err));
   }, []);
 
   const handleOrderDetail = (orderId) => {
     navigate(`/my-order/${orderId}`);
   };
+
+  if (loading) {
+    return <div></div>;
+  }
 
   return (
     <div
@@ -42,32 +51,34 @@ const MyOrderListPage = () => {
             </>
           ) : (
             <>
-              {orders.map((order) => (
-                <div key={order.id} className={styles.orderCard}>
-                  <div className={styles.orderTop}>
-                    <span>
-                      주문상태:{" "}
-                      {order.orderStatus === "PAYING" ? "결제중" : "주문완료"}
-                    </span>
-                  </div>
-                  <div className={styles.orderMid}>
-                    <strong>{order.orderItems[0]?.menuName}</strong>
-                    <div className={styles.priceBox}>
-                      <span>결제금액 </span>
-                      <span className={styles.price}>
-                        {order.totalPrice.toLocaleString()}원
+              {orders.map((order) =>
+                order.orderStatus !== "PAYING" ? (
+                  <div key={order.id} className={styles.orderCard}>
+                    <div className={styles.orderTop}>
+                      <span>
+                        주문상태:{" "}
+                        {order.orderStatus === "PAYING" ? "결제중" : "주문완료"}
                       </span>
                     </div>
+                    <div className={styles.orderMid}>
+                      <strong>{order.orderItems[0]?.menuName}</strong>
+                      <div className={styles.priceBox}>
+                        <span>결제금액 </span>
+                        <span className={styles.price}>
+                          {order.totalPrice.toLocaleString()}원
+                        </span>
+                      </div>
+                    </div>
+                    <div className={styles.branch}>{order.storeName}</div>
+                    <button
+                      className={styles.detailButton}
+                      onClick={() => handleOrderDetail(order.id)}
+                    >
+                      + 주문상세보기
+                    </button>
                   </div>
-                  <div className={styles.branch}>{order.storeName}</div>
-                  <button
-                    className={styles.detailButton}
-                    onClick={() => handleOrderDetail(order.id)}
-                  >
-                    + 주문상세보기
-                  </button>
-                </div>
-              ))}
+                ) : null
+              )}
             </>
           )}
         </div>
