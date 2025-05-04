@@ -29,7 +29,7 @@ public class StoreDto {
       this.storePhone = store.getStorePhone();
       this.openTime = store.getOpenTime();
       this.closeTime = store.getCloseTime();
-      this.userId = store.getUser().getId();
+      this.userId = store.getUser() != null ? store.getUser().getId() : null;
   }
 
   public Store toEntity(User user){
