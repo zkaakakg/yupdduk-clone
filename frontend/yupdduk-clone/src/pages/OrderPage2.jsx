@@ -914,6 +914,7 @@ const OrderPage2 = () => {
       .then(async (response) => {
         if (!response.ok) {
           console.error("응답 실패", response.status);
+          setLoading(false);
           return;
         }
 
@@ -925,10 +926,12 @@ const OrderPage2 = () => {
           setLoading(false);
         } else {
           console.warn("JSON 응답 아님");
+          setLoading(false);
         }
       })
       .catch((err) => {
         console.error("요청 실패:", err);
+        setLoading(false);
       });
   }, []);
 
@@ -1280,10 +1283,21 @@ const OrderPage2 = () => {
                 <p style={{ color: "rgb(222, 29, 36)", fontSize: "14px" }}>
                   (픽업 최소주문금액 9,000원)
                 </p>
-                <button className={styles.button} onClick={() => handleOrder()}>
+                <button
+                  className={styles.button}
+                  disabled={calculateTotalPrice() < 9000}
+                  onClick={() => handleOrder()}
+                  style={{
+                    background:
+                      calculateTotalPrice() < 9000 ? "rgb(180, 180, 180)" : "",
+                  }}
+                >
                   <p
                     style={{
-                      color: "rgb(255, 212, 23)",
+                      color:
+                        calculateTotalPrice() < 9000
+                          ? "white"
+                          : "rgb(255, 212, 23)",
                       fontWeight: "400",
                     }}
                   >
