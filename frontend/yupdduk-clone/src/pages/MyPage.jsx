@@ -8,7 +8,7 @@ const MyPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("acccessToken");
+    const token = localStorage.getItem("accessToken");
 
     fetch("http://localhost:8080/user", {
       method: "GET",

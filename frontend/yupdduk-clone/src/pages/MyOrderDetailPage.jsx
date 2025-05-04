@@ -7,7 +7,7 @@ import axios from "axios";
 const MyOrderDetailPage = () => {
   const [order, setOrder] = useState(null);
   const { orderId } = useParams();
-  const token = localStorage.getItem("acccessToken");
+  const token = localStorage.getItem("accessToken");
 
   useEffect(() => {
     axios
