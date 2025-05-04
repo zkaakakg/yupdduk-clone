@@ -10,13 +10,9 @@ const MyPage = () => {
 
   useEffect(() => {
     setLoading(true);
-    const token = localStorage.getItem("accessToken");
 
-    fetch("http://localhost:8080/user", {
+    fetch("http://localhost:8080/users", {
       method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
       credentials: "include",
     })
       .then(async (response) => {
