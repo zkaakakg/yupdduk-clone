@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -74,5 +75,9 @@ public class User {
 
     public String getRoleKey() {
         return this.userRole.getValue();
+    }
+
+    public void updateRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 }
