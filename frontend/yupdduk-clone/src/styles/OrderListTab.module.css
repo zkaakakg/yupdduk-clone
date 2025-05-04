@@ -1,0 +1,45 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  font-size: 14px;
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.headerRow {
+  background-color: #f0f0f0;
+  color: #555;
+}
+
+.table th,
+.table td {
+  padding: 8px 8px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.table td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: scroll;
+}
+
+.clickableRow {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.clickableRow:hover {
+  background-color: #f6fafe;
+}
+
+.statusPaying {
+  color: #e53935; /* 빨간색 */
+  font-weight: bold;
+}
+
+.statusCompleted {
+  color: #43a047; /* 초록색 */
+  font-weight: bold;
+}
