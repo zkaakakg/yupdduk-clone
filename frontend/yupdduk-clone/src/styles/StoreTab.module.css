@@ -1,0 +1,99 @@
+.formContainer {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+}
+
+.formGroup {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.formGroup label {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 8px;
+  width: 120px;
+  display: flex;
+  align-items: center;
+}
+
+.formGroup input[type="text"],
+.formGroup input[type="time"] {
+  width: calc(100% - 140px);
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.formGroup input[type="text"]:focus,
+.formGroup input[type="time"]:focus {
+  outline: none;
+  border-color: #d7a4a6;
+  box-shadow: 0 0 5px rgba(215, 164, 166, 0.5);
+}
+
+.submitBtn {
+  padding: 5px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #de1d24cb;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submitBtn:hover {
+  background-color: #d78c94;
+}
+
+.submitBtn:focus {
+  outline: none;
+}
+.storeContainer {
+  margin-top: 12px;
+}
+.card {
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+.namePhone {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.name {
+  font-weight: bold;
+  font-size: 18px;
+  flex-grow: 1;
+}
+
+.phone {
+  color: #333;
+  text-align: right;
+}
+.address {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 16px;
+}

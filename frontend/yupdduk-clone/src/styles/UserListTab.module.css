@@ -1,0 +1,57 @@
+.table {
+  width: 100%;
+  font-size: 14px;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-top: 20px;
+}
+
+.headerRow {
+  background-color: #f0f0f0;
+  color: #555;
+}
+
+.table th,
+.table td {
+  padding: 7px 7px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+  white-space: nowrap;
+}
+
+.userRow {
+  background-color: #ffffff;
+}
+
+.adminRow {
+  background-color: #fde3e3cb;
+}
+
+.role {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: black;
+}
+
+.updateBtn {
+  background-color: #3f7d58;
+  padding: 2px;
+  color: white;
+  border-radius: 30%;
+}
+.saveBtn {
+  background-color: #ec5228;
+  padding: 2px;
+  color: white;
+  border-radius: 30%;
+}
+.select {
+  all: unset;
+  appearance: none;
+  background: white;
+  border: 1px solid #0000006e;
+  padding: 2px;
+  font-size: 14px;
+  position: relative;
+}

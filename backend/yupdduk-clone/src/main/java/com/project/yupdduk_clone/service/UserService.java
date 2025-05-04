@@ -3,6 +3,7 @@ package com.project.yupdduk_clone.service;
 import com.project.yupdduk_clone.dto.UserDto;
 import com.project.yupdduk_clone.entity.User;
 import com.project.yupdduk_clone.entity.UserRepository;
+import com.project.yupdduk_clone.enumeration.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -97,6 +98,18 @@ public class UserService {
             return new UserDto(user.get());
         }else{
             throw new IllegalStateException("사용자를 찾을 수 없습니다.");
+        }
+    }
+
+    public void updateRole(Long userId, String userRole){
+        Optional<User> user = userRepository.findById(userId);
+        if(user.isPresent()){
+            UserRole role = UserRole.valueOf(userRole);
+            user.get().updateRole(role);
+            userRepository.save(user.get());
+        }else{
+            throw new IllegalStateException("사용자를 찾을 수 없습니다.");
+
         }
     }
 }

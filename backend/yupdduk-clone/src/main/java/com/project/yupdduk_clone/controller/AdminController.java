@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -57,6 +58,16 @@ public class AdminController {
         UserDto userDto = userService.getUserDetail(userId);
         return ResponseEntity.ok(userDto);
 
+    }
+
+    @PutMapping("/users/{id}/role")
+    public ResponseEntity<?> updateRole(@PathVariable("id") Long userId,  @RequestBody String userRole) {
+        try {
+            userService.updateRole(userId, userRole);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body("Invalid role");
+        }
     }
 
     @GetMapping("/orders")

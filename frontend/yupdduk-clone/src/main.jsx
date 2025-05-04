@@ -14,6 +14,7 @@ import OrderPage1 from "./pages/OrderPage1";
 import OrderPage2 from "./pages/OrderPage2";
 import PayPage1 from "./pages/PayPage1";
 import PayPage2 from "./pages/PayPage2";
+import AdminPage from "./pages/AdminPage";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -31,6 +32,7 @@ createRoot(document.getElementById("root")).render(
       <Route path="/order2/:storeId" element={<OrderPage2 />} />
       <Route path="/pay1" element={<PayPage1 />} />
       <Route path="/pay2" element={<PayPage2 />} />
+      <Route path="/admin" element={<AdminPage />} />
     </Routes>
   </BrowserRouter>
 );

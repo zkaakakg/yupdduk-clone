@@ -19,6 +19,7 @@ import java.security.Key;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Component
@@ -59,7 +60,16 @@ public class JwtTokenProvider {
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
-        return new UsernamePasswordAuthenticationToken(userPk, "", Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
+
+        String role = (String) Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("role");
+
+        List<SimpleGrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_" + role));
+        return new UsernamePasswordAuthenticationToken(userPk, "", authorities);
     }
 
     // 토큰에서 회원 정보 추출

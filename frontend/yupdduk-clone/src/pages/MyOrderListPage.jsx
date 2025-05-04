@@ -11,7 +11,7 @@ const MyOrderListPage = () => {
 
   useEffect(() => {
     setLoading(true);
-    const token = localStorage.getItem("acccessToken");
+    const token = localStorage.getItem("accessToken");
 
     axios
       .get("http://localhost:8080/orders", {

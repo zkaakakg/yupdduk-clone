@@ -1,0 +1,46 @@
+.container {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+/* 상단 고정 헤더 */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  color: #de1d24;
+  z-index: 1000;
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+}
+
+.menuItem {
+  cursor: pointer;
+  padding: 12px 1px;
+}
+
+.menuItem:hover,
+.active {
+  border-bottom: solid 5px #de1d24;
+}
+
+.mainContent {
+  padding: 80px 20px 20px; /* 헤더 높이 + 여유 공간 */
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.logout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

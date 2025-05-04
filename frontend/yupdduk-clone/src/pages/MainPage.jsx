@@ -41,6 +41,9 @@ const MainPage = () => {
           const data = await response.json();
           setUser(data);
           setLoading(false);
+          if (data.userRole === "ADMIN") {
+            navigate("/admin");
+          }
         } else {
           setUser(null);
           setLoading(false);
@@ -54,7 +57,7 @@ const MainPage = () => {
   }, []);
 
   const handleLogin = () => {
-    navigate("/login"); // 로그인 페이지로 이동
+    navigate("/login");
   };
 
   const handleOrder = () => {
