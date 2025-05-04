@@ -40,17 +40,6 @@ public class Order {
     private List<OrderItem> orderItems;
 
     @Builder
-    public Order(Long id, LocalDateTime orderTime, int totalPrice, OrderStatus orderStatus, Store store, User user, List<OrderItem> orderItems) {
-        this.id = id;
-        this.orderTime = orderTime;
-        this.totalPrice = totalPrice;
-        this.orderStatus = orderStatus;
-        this.store = store;
-        this.user = user;
-        this.orderItems=orderItems;
-    }
-
-    @Builder
     public Order(Integer totalPrice, OrderStatus orderStatus, Store store, User user, List<OrderItem> orderItems){
         this.totalPrice = totalPrice;
         this.orderStatus = orderStatus;

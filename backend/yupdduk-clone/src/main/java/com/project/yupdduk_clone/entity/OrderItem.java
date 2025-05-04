@@ -53,22 +53,6 @@ public class OrderItem {
     @Column(name = "side")
     private List<Side> sides;
 
-
-
-
-    @Builder
-    public OrderItem(Long id, Order order, Long menuid, String menuName, String menuType, String flavor, List<Topping> toppings, List<Side> sides, Integer price) {
-        this.id = id;
-        this.order = order;
-        this.menuid = menuid;
-        this.menuName = menuName;
-        this.menuType = menuType;
-        this.flavor = flavor;
-        this.toppings = toppings;
-        this.sides = sides;
-        this.price = price;
-    }
-
     @Builder
     public OrderItem(Long menuid, String menuName, String menuType, String flavor, List<Topping> toppings, List<Side> sides, Integer price, Integer totalPrice) {
         this.menuid = menuid;
