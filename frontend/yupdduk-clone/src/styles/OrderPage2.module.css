@@ -3,13 +3,15 @@
   font-weight: 500;
   padding: 4%;
   background-color: white;
-  margin-bottom: 4%;
+  margin-bottom: 3%;
+  border-bottom: gray;
 }
 .storeInfo1 {
   display: flex;
   background-color: white;
   padding: 13px;
   font-size: 15px;
+  margin-bottom: 3%;
 }
 .storeInfo1 > div:first-child {
   color: rgb(102, 102, 102);
@@ -23,7 +25,7 @@
   background-color: rgb(235, 235, 239);
 }
 .nav {
-  padding-top: 47px;
+  padding-top: 50px;
 }
 .mainMenu {
   display: flex;
@@ -79,7 +81,7 @@
   height: 30px;
 }
 
-.Header {
+.header {
   position: fixed;
   top: 0;
   left: 0;
@@ -97,7 +99,7 @@
   padding: 4%;
 }
 .menu img {
-  width: 30%;
+  width: 25%;
 }
 .menuTitle {
   width: 100%;

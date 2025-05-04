@@ -15,11 +15,23 @@
   align-items: center;
   padding-bottom: 96px;
 }
+.cartItemWrapper {
+  display: flex;
+  align-items: start;
+  gap: 3px;
+  width: 90%;
+}
+.cartItemWrapper img {
+  width: 20px;
+}
+.cartItemWrapper button {
+  padding-top: 2.5%;
+}
 .cartItem {
   display: flex;
   flex-direction: column;
   gap: 3px;
-  width: 90%;
+  width: 100%;
   padding: 2%;
 }
 .cartItem div {
@@ -45,7 +57,7 @@
 .menuPlus div:first-child {
   color: rgb(27, 27, 27);
 }
-.menuPlus div:nth-child(2) {
+.menuPlus div {
   color: rgb(126, 126, 126);
 }
 .info {

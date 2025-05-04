@@ -1,19 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import Header from "../components/Header.jsx";
 import styles from "../styles/OrderPage2.module.css";
 import 카트아이콘 from "../assets/카트아이콘.png";
+import { useNavigate } from "react-router-dom";
 
 const OrderPage2 = () => {
-  const storeInfo = {
-    id: 1,
-    storeName: "엽기떡볶이 남대문점",
-    managerName: "장가은",
-    address: "서울특별시 중구 세종대로 28 (남대문로5가) 103호",
-    storePhone: "02-318-8597",
-    openTime: "11:00:00",
-    closeTime: "22:00:00",
-    userId: 8,
-  };
+  const { storeId } = useParams();
+  const navigate = useNavigate();
+  const [storeInfo, setStoreInfo] = useState([]);
+  const [selectedMenu, setSelectedMenu] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedOptions, setSelectedOptions] = useState({});
+  const [cart, setCart] = useState([]);
+  const [loading, setLoading] = useState(true);
   const menuList = [
     {
       menuId: 1,
@@ -823,42 +823,38 @@ const OrderPage2 = () => {
       options: [],
     },
   ];
-  const [selectedMenu, setSelectedMenu] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState({});
-  const [cart, setCart] = useState([]);
 
   const handleOptionChange = (optionName, value, price, isCheckbox) => {
     setSelectedOptions((prev) => {
       const current = prev[optionName] || []; // current가 배열로 초기화됨
       if (isCheckbox) {
+        // 체크박스일 경우: 여러 개 선택 가능 → 배열 유지
         if (Array.isArray(current)) {
-          // current가 배열일 때만 some을 사용할 수 있음
-          if (current.some((item) => item.label === value)) {
+          if (current.some((item) => item.name === value)) {
             return {
               ...prev,
-              [optionName]: current.filter((item) => item.label !== value),
+              [optionName]: current.filter((item) => item.name !== value),
             };
           } else {
             return {
               ...prev,
               [optionName]: [
                 ...current,
-                { name: value, amount: 1, extraPrice: price }, // 값과 가격을 함께 저장
+                { name: value, amount: 1, extraPrice: price },
               ],
             };
           }
         } else {
-          // 만약 current가 배열이 아니면 새로운 배열로 설정
           return {
             ...prev,
             [optionName]: [{ name: value, amount: 1, extraPrice: price }],
           };
         }
       } else {
+        // 라디오 버튼이나 단일 선택도 배열로 저장되도록 변경
         return {
           ...prev,
-          [optionName]: { name: value, amount: 1, extraPrice: price }, // 값과 가격을 함께 저장
+          [optionName]: [{ name: value, amount: 1, extraPrice: price }],
         };
       }
     });
@@ -890,8 +886,8 @@ const OrderPage2 = () => {
     const cartItem = {
       menuId: selectedMenu.menuId,
       menuName: selectedMenu.menuName,
-      menuType: selectedOptions["엽기메뉴 선택"]?.name ?? null,
-      flavor: selectedOptions["맛 선택"]?.name ?? null,
+      menuType: selectedOptions["엽기메뉴 선택"]?.[0]?.name ?? null,
+      flavor: selectedOptions["맛 선택"]?.[0]?.name ?? null,
       price: selectedMenu.price,
       toppings: selectedOptions["추가메뉴(토핑)"] ?? [],
       sides: [
@@ -903,7 +899,78 @@ const OrderPage2 = () => {
     setSelectedOptions({});
     setIsModalOpen(false);
   };
+
+  useEffect(() => {
+    setLoading(true);
+    const token = localStorage.getItem("acccessToken");
+
+    fetch(`http://localhost:8080/stores/${storeId}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      credentials: "include", // 쿠키도 같이 보낼 때만 필요!
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          console.error("응답 실패", response.status);
+          return;
+        }
+
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const data = await response.json();
+          console.log("받은 데이터:", data);
+          setStoreInfo(data); // 받아온 데이터 저장
+          setLoading(false);
+        } else {
+          console.warn("JSON 응답 아님");
+        }
+      })
+      .catch((err) => {
+        console.error("요청 실패:", err);
+      });
+  }, []);
+
+  const handleOrder = () => {
+    const token = localStorage.getItem("acccessToken");
+    console.log("보낸 데이터:", cart);
+    fetch(`http://localhost:8080/orders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        storeId,
+        orderItems: cart,
+      }),
+      credentials: "include",
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          console.error("응답 실패", response.status);
+          return;
+        }
+
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const data = await response.json();
+          console.log("받은 데이터:", data);
+          navigate("/pay1", { state: { orderData: data } });
+        } else {
+          console.warn("JSON 응답 아님");
+        }
+      })
+      .catch((err) => {
+        console.error("요청 실패:", err);
+      });
+  };
   console.log(cart);
+
+  if (loading) {
+    return <div></div>;
+  }
 
   return (
     <div
@@ -914,27 +981,40 @@ const OrderPage2 = () => {
         height: "100vh",
       }}
     >
-      <Header
-        title="방문 포장"
-        ClickFunc={() => (isModalOpen ? setIsModalOpen(false) : "")}
-      />
-      <nav className={styles.nav}>
-        <div className={styles.storeName}>
-          <p>{storeInfo.storeName}</p>
-        </div>
-        <div className={styles.storeInfo1}>
-          <div style={{ width: "120px", fontWeight: "400" }}>
-            <p>· 주문방법</p>
-            <p>· 최소주문</p>
-            <p>· 위치안내</p>
+      <div className={styles.header}>
+        <Header
+          title="방문 포장"
+          ClickFunc={isModalOpen ? () => setIsModalOpen(false) : undefined}
+        />
+      </div>
+
+      {loading ? (
+        <p></p>
+      ) : (
+        <nav className={styles.nav}>
+          <div className={styles.storeName}>
+            <p>엽기떡볶이 {storeInfo.storeName}</p>
           </div>
-          <div style={{ fontWeight: "400" }}>
-            <p style={{ color: "rgb(222, 29, 36)" }}>방문 포장</p>
-            <p style={{ paddingLeft: "2px" }}>9,000원</p>
-            <p>{storeInfo.address}</p>
+          <div className={styles.storeInfo1}>
+            <div style={{ width: "120px", fontWeight: "400" }}>
+              <p>· 주문방법</p>
+              <p>· 최소주문</p>
+              <p>· 여는시간</p>
+              <p>· 닫는시간</p>
+              <p>· 매장번호</p>
+              <p>· 위치안내</p>
+            </div>
+            <div style={{ fontWeight: "400" }}>
+              <p style={{ color: "rgb(222, 29, 36)" }}>방문 포장</p>
+              <p style={{ paddingLeft: "2px" }}>9,000원</p>
+              <p>{storeInfo.openTime.slice(0, 5)}</p>
+              <p>{storeInfo.closeTime.slice(0, 5)}</p>
+              <p>{storeInfo.storePhone}</p>
+              <p>{storeInfo.address}</p>
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
+      )}
       <main className={styles.main}>
         <div className={styles.mainMenu}>
           <img
@@ -1200,7 +1280,7 @@ const OrderPage2 = () => {
                 <p style={{ color: "rgb(222, 29, 36)", fontSize: "14px" }}>
                   (픽업 최소주문금액 9,000원)
                 </p>
-                <button className={styles.button}>
+                <button className={styles.button} onClick={() => handleOrder()}>
                   <p
                     style={{
                       color: "rgb(255, 212, 23)",

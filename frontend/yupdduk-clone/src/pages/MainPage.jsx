@@ -51,6 +51,10 @@ const MainPage = () => {
     navigate("/login"); // 로그인 페이지로 이동
   };
 
+  const handleOrder = () => {
+    navigate("/order1");
+  };
+
   const openMenu = () => {
     setIsOpen(true);
   };
@@ -249,7 +253,7 @@ const MainPage = () => {
             />
             <p>배달주문</p>
           </button>
-          <button className={styles.orderButton}>
+          <button className={styles.orderButton} onClick={handleOrder}>
             <img src={방문포장} alt="" style={{ width: "70px" }} />
             <p>방문포장</p>
           </button>

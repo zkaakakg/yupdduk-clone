@@ -1,66 +1,57 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../components/Header.jsx";
 import styles from "../styles/OrderPage1.module.css";
+import { useNavigate } from "react-router-dom";
 
 const OrderPage1 = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [stores, setStores] = useState([]);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
-  const stores = [
-    {
-      id: 1,
-      name: "김포사우점",
-      address: "경기도 김포시 돌문로86번길 12-18 (사우동) 1층 103호",
-    },
-    {
-      id: 2,
-      name: "김포풍무점",
-      address: "경기도 김포시 풍무로 51 (풍무동) 104호",
-    },
-    {
-      id: 3,
-      name: "김포운양점",
-      address: "경기도 김포시 한강1로 247(운양동), 김포운양헤리움타운 124호",
-    },
-    {
-      id: 4,
-      name: "김포고촌점",
-      address: "김포시 고촌읍 장차로5번길 10 1층103호",
-    },
-    {
-      id: 1,
-      name: "김포사우점",
-      address: "경기도 김포시 돌문로86번길 12-18 (사우동) 1층 103호",
-    },
-    {
-      id: 2,
-      name: "김포풍무점",
-      address: "경기도 김포시 풍무로 51 (풍무동) 104호",
-    },
-    {
-      id: 3,
-      name: "김포운양점",
-      address: "경기도 김포시 한강1로 247(운양동), 김포운양헤리움타운 124호",
-    },
-    {
-      id: 4,
-      name: "김포고촌점",
-      address: "김포시 고촌읍 장차로5번길 10 1층103호",
-    },
-    {
-      id: 1,
-      name: "김포사우점",
-      address: "경기도 김포시 돌문로86번길 12-18 (사우동) 1층 103호",
-    },
-    {
-      id: 2,
-      name: "김포풍무점",
-      address: "경기도 김포시 풍무로 51 (풍무동) 104호",
-    },
-  ];
+  useEffect(() => {
+    setLoading(true);
+    const token = localStorage.getItem("acccessToken"); // 철자: acccess → access 수정!
+
+    fetch("http://localhost:8080/stores", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      credentials: "include", // 쿠키도 같이 보낼 때만 필요!
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          console.error("응답 실패", response.status);
+          return;
+        }
+
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const data = await response.json();
+          console.log("받은 데이터:", data);
+          setStores(data); // 받아온 데이터 저장
+          setLoading(false);
+        } else {
+          console.warn("JSON 응답 아님");
+        }
+      })
+      .catch((err) => {
+        console.error("요청 실패:", err);
+      });
+  }, []);
 
   const filteredStores = stores.filter((store) =>
-    store.name.toLowerCase().includes(searchTerm.toLowerCase())
+    store.storeName.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handleOrder2 = (storeId) => {
+    navigate(`/order2/${storeId}`);
+  };
+
+  if (loading) {
+    return <div></div>;
+  }
 
   return (
     <div>
@@ -92,8 +83,12 @@ const OrderPage1 = () => {
           {filteredStores.length > 0 ? (
             <>
               {filteredStores.map((store) => (
-                <li className={styles.store} key={store.id}>
-                  <p className={styles.storeName}>{store.name}</p>
+                <li
+                  className={styles.store}
+                  key={store.id}
+                  onClick={() => handleOrder2(store.id)}
+                >
+                  <p className={styles.storeName}>{store.storeName}</p>
                   <p className={styles.storeAddress}>{store.address}</p>
                 </li>
               ))}

@@ -28,7 +28,7 @@ createRoot(document.getElementById("root")).render(
       <Route path="/my-order/:orderId" element={<MyOrderDetailPage />} />
       <Route path="/oauth/callback" element={<OAuthCallbackPage />} />
       <Route path="/order1" element={<OrderPage1 />} />
-      <Route path="/order2" element={<OrderPage2 />} />
+      <Route path="/order2/:storeId" element={<OrderPage2 />} />
       <Route path="/pay1" element={<PayPage1 />} />
       <Route path="/pay2" element={<PayPage2 />} />
     </Routes>
