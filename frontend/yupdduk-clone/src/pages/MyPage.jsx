@@ -153,6 +153,7 @@ const MyPage = () => {
                 borderRadius: "20px",
                 backgroundColor: "#DE1D24",
                 color: "white",
+                fontSize: "16px",
               }}
               onClick={handleLogout}
             >

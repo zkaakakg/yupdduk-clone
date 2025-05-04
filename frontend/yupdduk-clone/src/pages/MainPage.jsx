@@ -253,9 +253,16 @@ const MainPage = () => {
             />
             <p>배달주문</p>
           </button>
-          <button className={styles.orderButton} onClick={handleOrder}>
+          <button
+            className={styles.orderButton}
+            onClick={() =>
+              user === null
+                ? alert("로그인 후에 이용해 주세요. ")
+                : handleOrder()
+            }
+          >
             <img src={방문포장} alt="" style={{ width: "70px" }} />
-            <p>방문포장</p>
+            <p style={{ color: "black" }}>방문포장</p>
           </button>
           <button className={styles.orderButton}>
             <img src={홀주문} alt="" style={{ width: "70px" }} />
