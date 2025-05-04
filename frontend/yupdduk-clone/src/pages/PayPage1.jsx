@@ -12,7 +12,7 @@ const PayPage1 = () => {
   const [cartItems, setCartItems] = useState(orderData.orderItems);
 
   const handleDelete = (id) => {
-    const token = localStorage.getItem("acccessToken");
+    const token = localStorage.getItem("accessToken");
 
     fetch(`http://localhost:8080/orders/item/${id}`, {
       method: "DELETE",

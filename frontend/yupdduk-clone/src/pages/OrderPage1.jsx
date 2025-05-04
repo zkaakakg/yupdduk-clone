@@ -11,7 +11,7 @@ const OrderPage1 = () => {
 
   useEffect(() => {
     setLoading(true);
-    const token = localStorage.getItem("acccessToken"); // 철자: acccess → access 수정!
+    const token = localStorage.getItem("accessToken"); // 철자: acccess → access 수정!
 
     fetch("http://localhost:8080/stores", {
       method: "GET",
