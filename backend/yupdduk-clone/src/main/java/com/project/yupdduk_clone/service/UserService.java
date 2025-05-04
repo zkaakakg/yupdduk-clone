@@ -2,7 +2,7 @@ package com.project.yupdduk_clone.service;
 
 import com.project.yupdduk_clone.dto.UserDto;
 import com.project.yupdduk_clone.entity.User;
-import com.project.yupdduk_clone.entity.UserRepository;
+import com.project.yupdduk_clone.repository.UserRepository;
 import com.project.yupdduk_clone.enumeration.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,9 +26,9 @@ public class UserService {
 
     public void signUp(UserDto userDto) {
         String encodedPassword = passwordEncoder.encode(userDto.getPassword());
-        userDto.setPassword(encodedPassword);
-        this.userRepository.save(userDto.toEntity());
-
+        User user = userDto.toEntity();
+        user.updatePassword(encodedPassword);
+        this.userRepository.save(user);
     }
 
     public Optional<User> getUser() {
