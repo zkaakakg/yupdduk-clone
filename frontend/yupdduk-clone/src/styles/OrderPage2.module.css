@@ -25,7 +25,7 @@
   background-color: rgb(235, 235, 239);
 }
 .nav {
-  padding-top: 0px;
+  padding-top: 50px;
 }
 .mainMenu {
   display: flex;
@@ -81,7 +81,7 @@
   height: 30px;
 }
 
-.Header {
+.header {
   position: fixed;
   top: 0;
   left: 0;

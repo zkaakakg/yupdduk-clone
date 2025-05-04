@@ -886,8 +886,8 @@ const OrderPage2 = () => {
     const cartItem = {
       menuId: selectedMenu.menuId,
       menuName: selectedMenu.menuName,
-      menuType: selectedOptions["엽기메뉴 선택"]?.name ?? null,
-      flavor: selectedOptions["맛 선택"]?.name ?? null,
+      menuType: selectedOptions["엽기메뉴 선택"]?.[0]?.name ?? null,
+      flavor: selectedOptions["맛 선택"]?.[0]?.name ?? null,
       price: selectedMenu.price,
       toppings: selectedOptions["추가메뉴(토핑)"] ?? [],
       sides: [
@@ -934,7 +934,7 @@ const OrderPage2 = () => {
 
   const handleOrder = () => {
     const token = localStorage.getItem("acccessToken");
-
+    console.log("보낸 데이터:", cart);
     fetch(`http://localhost:8080/orders`, {
       method: "POST",
       headers: {
@@ -977,10 +977,13 @@ const OrderPage2 = () => {
         height: "100vh",
       }}
     >
-      <Header
-        title="방문 포장"
-        ClickFunc={() => (isModalOpen ? setIsModalOpen(false) : "")}
-      />
+      <div className={styles.header}>
+        <Header
+          title="방문 포장"
+          ClickFunc={isModalOpen ? () => setIsModalOpen(false) : undefined}
+        />
+      </div>
+
       {loading ? (
         <p></p>
       ) : (
