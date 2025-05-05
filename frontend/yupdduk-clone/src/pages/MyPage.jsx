@@ -49,8 +49,9 @@ const MyPage = () => {
       });
       if (response.ok) {
         alert("로그아웃이 완료되었습니다.");
-        navigate("/");
+        localStorage.clear();
         setUser(null);
+        navigate("/");
       } else {
         console.error("서버 에러", response);
         alert("로그이웃에 실패했습니다.");
