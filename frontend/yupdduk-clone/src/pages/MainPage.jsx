@@ -20,7 +20,7 @@ const MainPage = () => {
 
   useEffect(() => {
     setLoading(true);
-    const token = localStorage.getItem("acccessToken");
+    const token = localStorage.getItem("accessToken");
 
     fetch("http://localhost:8080/users", {
       method: "GET",
