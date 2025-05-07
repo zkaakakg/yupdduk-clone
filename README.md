@@ -10,7 +10,7 @@
 
 | <img src="https://avatars.githubusercontent.com/u/145041049?v=4" width="150" height="150"/> | <img src="https://avatars.githubusercontent.com/u/180184232?v=4" width="150" height="150"/> |
 | :-----------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------: |
-|                      유지원<br/>[@nowwizz](https://github.com/nowwizz)                      |                     장가은<br/>[@zkaakakg](https://github.com/nowwizz)                      |
+|                      유지원<br/>[@nowwizz](https://github.com/nowwizz)                      |                     장가은<br/>[@zkaakakg](https://github.com/zkaakakg)                      |
 
 </div>
 
