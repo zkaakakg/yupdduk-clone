@@ -1,8 +1,9 @@
 package com.project.yupdduk_clone.security.config;
 
-import com.project.yupdduk_clone.security.oAuth2.OAuth2SuccessHandler;
 import com.project.yupdduk_clone.security.jwt.JwtAuthenticationFilter;
+import com.project.yupdduk_clone.security.jwt.JwtLoginSuccessHandler;
 import com.project.yupdduk_clone.security.jwt.JwtTokenProvider;
+import com.project.yupdduk_clone.security.oAuth2.OAuth2SuccessHandler;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -26,12 +28,16 @@ import java.util.Arrays;
 public class SecurityConfig {
     private final OAuth2SuccessHandler oAuth2SuccessHandler;
     private final JwtTokenProvider jwtTokenProvider;
+    private final JwtLoginSuccessHandler jwtLoginSuccessHandler;
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf((csrf) -> csrf.disable())
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
@@ -40,9 +46,7 @@ public class SecurityConfig {
                 .formLogin((formLogin) -> formLogin
                         .loginProcessingUrl("/auth/login")
                         .usernameParameter("email")
-                        .successHandler((request, response, authentication) -> {
-                            response.setStatus(HttpServletResponse.SC_OK);
-                        })
+                        .successHandler(jwtLoginSuccessHandler)
                         .failureHandler((request, response, exception) -> {
                             request.getSession().invalidate();
                             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
