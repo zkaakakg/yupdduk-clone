@@ -12,6 +12,7 @@ const StoreTab = () => {
     closeTime: "",
   });
   const [stores, setStores] = useState([]);
+  const token = localStorage.getItem("accessToken");
 
   const handleChange = (e) => {
     const onlyNums = e.target.value.replace(/\D/g, "");
@@ -30,6 +31,9 @@ const StoreTab = () => {
   const getStores = async () => {
     try {
       const res = await axios.get("http://localhost:8080/stores", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         withCredentials: true,
       });
       setStores(res.data);
@@ -48,7 +52,10 @@ const StoreTab = () => {
     try {
       const response = await fetch("http://localhost:8080/admin/stores", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify(form),
         credentials: "include",
       });
