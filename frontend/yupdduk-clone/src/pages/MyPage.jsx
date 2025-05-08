@@ -7,12 +7,14 @@ const MyPage = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const token = localStorage.getItem("accessToken");
 
   useEffect(() => {
     setLoading(true);
 
     fetch("http://localhost:8080/users", {
       method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
       credentials: "include",
     })
       .then(async (response) => {

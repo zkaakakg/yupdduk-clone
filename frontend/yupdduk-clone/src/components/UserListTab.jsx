@@ -6,10 +6,9 @@ const UserListTab = () => {
   const [users, setUsers] = useState([]);
   const [roleEdit, setRoleEdit] = useState(null);
   const [newRole, setNewRole] = useState("");
+  const token = localStorage.getItem("accessToken");
 
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-
     axios
       .get("http://localhost:8080/admin/users", {
         headers: {
@@ -30,6 +29,7 @@ const UserListTab = () => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: newRole,
       credentials: "include",

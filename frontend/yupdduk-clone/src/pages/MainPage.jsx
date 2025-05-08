@@ -17,10 +17,10 @@ const MainPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem("accessToken");
 
   useEffect(() => {
     setLoading(true);
-    const token = localStorage.getItem("accessToken");
 
     fetch("http://localhost:8080/users", {
       method: "GET",
@@ -85,13 +85,17 @@ const MainPage = () => {
     try {
       const response = await fetch("http://localhost:8080/auth/logout", {
         method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         credentials: "include",
       });
       if (response.ok) {
         alert("로그아웃이 완료되었습니다.");
+        localStorage.clear();
+        setUser(null);
         navigate("/");
         setIsOpen(false);
-        setUser(null);
       } else {
         console.error("서버 에러", response);
         alert("로그아아웃에 실패했습니다.");

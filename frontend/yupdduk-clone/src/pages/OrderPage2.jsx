@@ -942,7 +942,7 @@ const OrderPage2 = () => {
   }, []);
 
   const handleOrder = () => {
-    const token = localStorage.getItem("acccessToken");
+    const token = localStorage.getItem("accessToken");
     console.log("보낸 데이터:", cart);
     fetch(`http://localhost:8080/orders`, {
       method: "POST",

@@ -43,7 +43,7 @@ const PayPage1 = () => {
       });
   };
   const handlePay = () => {
-    const token = localStorage.getItem("acccessToken");
+    const token = localStorage.getItem("accessToken");
 
     fetch(`http://localhost:8080/orders/${orderData.id}/confirm`, {
       method: "PUT",

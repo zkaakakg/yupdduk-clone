@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 const AdminPage = () => {
   const navigate = useNavigate();
   const [activeMenu, setActiveMenu] = useState("store");
+  const token = localStorage.getItem("accessToken");
 
   const handleMenuClick = (menu) => {
     setActiveMenu(menu);
@@ -19,10 +20,14 @@ const AdminPage = () => {
     try {
       const response = await fetch("http://localhost:8080/auth/logout", {
         method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
         credentials: "include",
       });
       if (response.ok) {
         alert("로그아웃이 완료되었습니다.");
+        localStorage.clear();
         navigate("/");
       } else {
         console.error("서버 에러", response);
