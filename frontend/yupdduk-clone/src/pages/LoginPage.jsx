@@ -25,6 +25,11 @@ const LoginPage = () => {
       });
 
       if (response.ok) {
+        const data = await response.json();
+        const token = data.token;
+
+        localStorage.setItem("accessToken", token);
+
         alert("로그인이 완료되었습니다.");
         navigate("/");
       } else {
